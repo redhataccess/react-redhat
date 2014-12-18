@@ -12,7 +12,7 @@ Under active development - APIs will change.
 
 ## Related modules
 
-- [react--bootstrap](https://github.com/react-bootstrap/react-bootstrap)
+- [react-bootstrap](https://github.com/react-bootstrap/react-bootstrap)
 
 ## Contributions
 
