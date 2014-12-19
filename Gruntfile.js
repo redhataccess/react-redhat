@@ -1,5 +1,8 @@
 module.exports = function (grunt) {
 
+  // load all grunt tasks
+  require("matchdep").filterAll("grunt-*").forEach(grunt.loadNpmTasks);
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
@@ -120,6 +123,26 @@ module.exports = function (grunt) {
       }
     },
 
+    //release: {
+    //  npm: {
+    //    options: {
+    //      folder: 'tools/cjs'
+    //    }
+    //  },
+    //  bower: {
+    //    options: {
+    //      file: 'bower.json',
+    //      folder: 'tools/amd'
+    //    }
+    //
+    //  }
+    //},
+    release: {
+      options: {
+        folder: 'cjs'
+      }
+    },
+
     requirejs: {
       dev: {
         // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
@@ -164,18 +187,41 @@ module.exports = function (grunt) {
         src: 'amd/<%= pkg.name %>.js',
         dest: 'amd/<%= pkg.name %>.min.js'
       }
-    }
+    },
 
+    bump: {
+      options: {
+        files: ['package.json'],
+        pushTo: 'origin',
+        commitFiles: ['.']
+      }
+    },
+
+    shell: {
+      npmpublish: {
+        command: [
+            'cd cjs',
+            'npm publish'
+        ].join('&&')
+      }
+    }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks("grunt-amd-wrap");
-  grunt.loadNpmTasks('grunt-react');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-browserify');
-  grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.registerTask("release-minor", "Releases a new minor version, pushes, and published", function(target) {
+    if (!target) {
+      target = "minor";
+    }
+    grunt.task.run("bump-only:" + target, "build", 'bump-commit', 'shell:npmpublish');
+  });
+  //grunt.loadNpmTasks('grunt-release');
+  //grunt.loadNpmTasks('grunt-contrib-uglify');
+  //grunt.loadNpmTasks("grunt-amd-wrap");
+  //grunt.loadNpmTasks('grunt-react');
+  //grunt.loadNpmTasks('grunt-contrib-clean');
+  //grunt.loadNpmTasks('grunt-contrib-watch');
+  //grunt.loadNpmTasks('grunt-contrib-copy');
+  //grunt.loadNpmTasks('grunt-browserify');
+  //grunt.loadNpmTasks('grunt-contrib-requirejs');
 
   grunt.registerTask('build', [
     'clean:amd',
