@@ -207,11 +207,11 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask("release-minor", "Releases a new minor version, pushes, and published", function(target) {
-    if (!target) {
-      target = "patch";
+  grunt.registerTask("release", "Releases a new minor version, pushes, and published", function(type) {
+    if (!type) {
+      type = "patch";
     }
-    grunt.task.run("bump-only:" + target, "build", 'bump-commit', 'shell:npmpublish');
+    grunt.task.run("bump-only:" + type, "build", 'bump-commit', 'shell:npmpublish');
   });
   //grunt.loadNpmTasks('grunt-release');
   //grunt.loadNpmTasks('grunt-contrib-uglify');
