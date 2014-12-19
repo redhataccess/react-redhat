@@ -1,8 +1,8 @@
 {
-  "name": "react-redhat",
-  "version": "0.0.2",
-  "description": "Bootstrap 3 components build with React",
-  "homepage": "https://github.com/redhataccess/react-redhat",
+  "name": "<%= pkg.name %>",
+  "version": "<%= pkg.version %>",
+  "description": "<%= pkg.description %>",
+  "homepage": "<%= pkg.homepage %>",
   "main": "main.js",
   "keywords": [
     "react",
@@ -10,7 +10,8 @@
     "react-component",
     "bootstrap"
   ],
-  "author": "Samuel Mendenhall <smendenh@redhat.com>",
+  "author": "<%= pkg.author %>",
+  "license": "<%= pkg.license %>",
   "repository": {
     "type": "git",
     "url": "redhataccess/react-redhat"
@@ -19,7 +20,6 @@
     "url": "https://github.com/redhataccess/react-redhat/issues"
   },
   "peerDependencies": {
-    "react": ">=0.12",
-    "react-bootstrap": ">=.13"
+    "react": ">=0.12"
   }
 }
