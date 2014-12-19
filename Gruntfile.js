@@ -209,7 +209,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask("release-minor", "Releases a new minor version, pushes, and published", function(target) {
     if (!target) {
-      target = "minor";
+      target = "patch";
     }
     grunt.task.run("bump-only:" + target, "build", 'bump-commit', 'shell:npmpublish');
   });
