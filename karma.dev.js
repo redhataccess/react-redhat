@@ -3,10 +3,19 @@ module.exports = function (config) {
 
     basePath: '',
 
+    plugins: [
+      'karma-jquery',
+      'karma-mocha',
+      'karma-chai',
+      'karma-sinon',
+      'karma-chrome-launcher'
+    ],
+
     frameworks: [
       'mocha',
       'chai',
-      'sinon'
+      'sinon',
+      'jquery-2.0.1'
     ],
 
     files: [
@@ -20,6 +29,7 @@ module.exports = function (config) {
     colors: true,
 
     logLevel: config.LOG_INFO,
+    //logLevel: config.LOG_DEBUG,
 
     autoWatch: true,
 

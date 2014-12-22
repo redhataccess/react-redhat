@@ -5,6 +5,14 @@ var Tooltip         = require('react-bootstrap/Tooltip');
 
 var Component = React.createClass({
     displayName: 'IconWithTooltip',
+    propTypes: {
+        // Optional string to prefix the tooltip with
+        tooltipPrefix: React.PropTypes.string,
+        // Text of the tooltip itself
+        tooltipText: React.PropTypes.string,
+        // Icon name, for example using font-awesome you may pass 'fa fa-user'
+        iconName: React.PropTypes.string
+    },
     genTooltipPrefix: function() {
         if ((this.props.tooltipPrefix == null) || this.props.tooltipPrefix === '') {
             return '';

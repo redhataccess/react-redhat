@@ -3,10 +3,13 @@ module.exports = function(config) {
 
     basePath: '',
 
+    plugins: ['karma-jquery'],
+
     frameworks: [
       'mocha',
       'chai',
-      'sinon'
+      'sinon',
+      'jquery-2.0.1'
     ],
 
     files: [

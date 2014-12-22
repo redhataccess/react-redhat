@@ -207,22 +207,13 @@ module.exports = function (grunt) {
     }
   });
 
+  // https://coderwall.com/p/sdokrw/automate-js-releasing-with-grunt
   grunt.registerTask("release", "Releases a new minor version, pushes, and published", function(type) {
     if (!type) {
       type = "patch";
     }
     grunt.task.run("bump-only:" + type, "build", 'bump-commit', 'shell:npmpublish');
   });
-  //grunt.loadNpmTasks('grunt-release');
-  //grunt.loadNpmTasks('grunt-contrib-uglify');
-  //grunt.loadNpmTasks("grunt-amd-wrap");
-  //grunt.loadNpmTasks('grunt-react');
-  //grunt.loadNpmTasks('grunt-contrib-clean');
-  //grunt.loadNpmTasks('grunt-contrib-watch');
-  //grunt.loadNpmTasks('grunt-contrib-copy');
-  //grunt.loadNpmTasks('grunt-browserify');
-  //grunt.loadNpmTasks('grunt-contrib-requirejs');
-
   grunt.registerTask('build', [
     'clean:amd',
     'clean:cjs',
