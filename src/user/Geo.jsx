@@ -7,7 +7,7 @@ var Component = React.createClass({
     geo: React.PropTypes.string
   },
   render: function () {
-    return <Label bsStyle='info'>{this.props.geo}</Label>;
+    return <Label key={this.props.geo} bsStyle='info'>{this.props.geo}</Label>;
   }
 });
 

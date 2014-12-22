@@ -39,12 +39,12 @@ module.exports = React.createClass({
         isParent = role.resource.parentRole == null;
         roleDescRes = [];
         if (isParent) {
-            roleDescRes.push(<i className='fa fa-users'></i>);
+            roleDescRes.push(<i key='fa-users' className='fa fa-users'></i>);
             //roleDescRes.push(' ');
         }
         if (isParent && (userId != null)) {
             roleLink = (
-                <a className='label-link' href={`#Roles/${encodeURIComponent(role.resource.name)}/${userId}`}>
+                <a key={role.resource.name} className='label-link' href={`#Roles/${encodeURIComponent(role.resource.name)}/${userId}`}>
                 {role.resource.description}
                 </a>
             );
@@ -53,19 +53,19 @@ module.exports = React.createClass({
             if (this.state.parentUser != null) {
                 roleLink = (
                     <span>
-                        <span>{role.resource.description}</span>
-                        <span>: </span>
-                        <a className='label-link' href={`#Roles/${encodeURIComponent(role.resource.parentRole.resource.name)}/${this.state.parentUser.externalModelId}`}>
+                        <span key={role.resource.description}>{role.resource.description}</span>
+                        <span key='colon'>: </span>
+                        <a key={role.resource.parentRole.resource.name} className='label-link' href={`#Roles/${encodeURIComponent(role.resource.parentRole.resource.name)}/${this.state.parentUser.externalModelId}`}>
                         {this.state.parentUser.resource.fullName}
                         </a>
                     </span>
                 )
             } else {
-                roleLink = <span>{role.resource.description}</span>
+                roleLink = <span key={role.resource.description}>{role.resource.description}</span>
             }
             roleDescRes.push(roleLink);
         }
-        roleDesc = <span>{roleDescRes}</span>;
+        roleDesc = <span key='role-description'>{roleDescRes}</span>;
         if (!isParent) {
             roleStyle = 'danger';
         }
@@ -73,18 +73,18 @@ module.exports = React.createClass({
             roleStyle = 'default';
         }
         overlayPopover = (
-            <Popover title={role.resource.description}>
+            <Popover key='sbr-popover' title={role.resource.description}>
                 <Sbrs sbrs={role.resource.sbrs}></Sbrs>
             </Popover>
         );
         geoComponent = role.resource.superRegion != null ? <Geo geo={role.resource.superRegion}></Geo> : null;
         sbrsComponent = role.resource.sbrs != null ? <Sbrs sbrs={role.resource.sbrs}></Sbrs>: null;
         return (
-            <span>
+            <span key='role-container'>
                 &nbsp;
-                <OverlayTrigger overlay={overlayPopover} placement='bottom'>
-                    <div>
-                        <Label bsStyle={roleStyle}>{roleDesc}</Label>
+                <OverlayTrigger key='role-overlay' overlay={overlayPopover} placement='bottom'>
+                    <div key='role-overlay-container'>
+                        <Label key='role-description' bsStyle={roleStyle}>{roleDesc}</Label>
                         {geoComponent}
                         {sbrsComponent}
                     </div>
