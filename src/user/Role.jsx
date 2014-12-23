@@ -37,24 +37,31 @@ module.exports = React.createClass({
         var role, overlayPopover, geoComponent, sbrsComponent;
         role = this.props.role;
 
-        overlayPopover = (
-            <Popover key='sbr-popover' title={role.resource.description}>
-                <Sbrs sbrs={role.resource.sbrs}></Sbrs>
-            </Popover>
-        );
-        geoComponent = role.resource.superRegion != null ? <Geo geo={role.resource.superRegion}></Geo> : null;
-        sbrsComponent = role.resource.sbrs != null ? <Sbrs sbrs={role.resource.sbrs}></Sbrs>: null;
+        //overlayPopover = (
+        //    <Popover key='sbr-popover' title={role.resource.description}>
+        //        <Sbrs sbrs={role.resource.sbrs}></Sbrs>
+        //    </Popover>
+        //);
+        geoComponent = role.resource.superRegion != null ? <span>&nbsp;<Geo geo={role.resource.superRegion}></Geo></span> : null;
+        sbrsComponent = role.resource.sbrs != null ? <span>&nbsp;<Sbrs sbrs={role.resource.sbrs}></Sbrs></span> : null;
+        //return (
+        //    <span key='role-container'>
+        //        &nbsp;
+        //        <OverlayTrigger key='role-overlay' overlay={overlayPopover} placement='bottom'>
+        //            <div key='role-overlay-container'>
+        //                <RoleDescription {...this.props}></RoleDescription>
+        //                {geoComponent}
+        //                {sbrsComponent}
+        //            </div>
+        //        </OverlayTrigger>
+        //    </span>
+        //)
         return (
-            <span key='role-container'>
-                &nbsp;
-                <OverlayTrigger key='role-overlay' overlay={overlayPopover} placement='bottom'>
-                    <div key='role-overlay-container'>
-                        <RoleDescription {...this.props}></RoleDescription>
-                        {geoComponent}
-                        {sbrsComponent}
-                    </div>
-                </OverlayTrigger>
-            </span>
+            <div key='role-container'>
+                <RoleDescription {...this.props}></RoleDescription>
+                {geoComponent}
+                {sbrsComponent}
+            </div>
         )
     }
 });

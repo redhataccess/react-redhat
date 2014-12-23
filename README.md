@@ -16,9 +16,9 @@ Under active development - APIs will change.
 
 ## Contributions
 
-Yes please!
+For rapid development I recommend having the test-watch and docs/ start npm actions running
 
 - Run `npm install`, `npm run test-watch` to run tests while you develop (however this hides any build errors, you can see these with `grunt build`)
+- In the docs directory run `npm run start` to run the components site which will be reloaded whenver the react-redhat code changes.  This will help in visually verifying behavior.  You can locally see changes @ [http://localhost:4000/components.html](http://localhost:4000/components.html)
 - Add tests for any new or changed functionality
-- See [issues](https://github.com/redhataccess/react-redhat/issues) for some ideas
 - Follow existing style

@@ -1,5 +1,6 @@
-var React = require('react');
-var moment = require('moment');
+var React   = require('react');
+var moment  = require('moment');
+var _       = require('lodash');
 
 var Spacer              = require('../Spacer');
 
