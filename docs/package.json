@@ -29,5 +29,9 @@
     "start-prod": "NODE_ENV=production node server.js"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react-async": "~2.0.1",
+    "react-router-component": "~0.23.2"
+  }
 }
