@@ -1,6 +1,5 @@
-var React            = require('react/addons');
-
-var Label            = require('react-bootstrap/Label');
+var React = require('react/addons');
+var Label = require('react-bootstrap/Label');
 
 var Component = React.createClass({
   propTypes: {

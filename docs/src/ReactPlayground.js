@@ -10,6 +10,9 @@ var Geo         = require('../../cjs/user/Geo');
 var Timezone    = require('../../cjs/user/Timezone');
 var Sbrs        = require('../../cjs/user/Sbrs');
 
+var UserSearch      = require('../../cjs/usersearch/UserSearch');
+var TimezoneSelect  = require('../../cjs/usersearch/TimezoneSelect');
+
 var IS_MOBILE = typeof navigator !== 'undefined' && (
   navigator.userAgent.match(/Android/i)
     || navigator.userAgent.match(/webOS/i)
@@ -205,6 +208,7 @@ var ReactPlayground = React.createClass({
         eval(compiledCode);
       }
     } catch (err) {
+      console.error(err.stack || err.message || err);
       this.setTimeout(function() {
         React.render(
           <Alert bsStyle="danger">{err.stack}</Alert>,

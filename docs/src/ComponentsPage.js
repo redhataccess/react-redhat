@@ -81,6 +81,14 @@ var ComponentsPage = React.createClass({
                   <p>Display the Sbrs of a User or Resource</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/user/Sbrs.js', 'utf8')} />
 
+                  <h3 id="userSearch">User Search</h3>
+                  <p>Search for current users</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/usersearch/UserSearchExample.js', 'utf8')} />
+
+                  <h3 id="timezoneSelect">Timezone Select</h3>
+                  <p>Select a Timezone</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/usersearch/TimezoneSelectExample.js', 'utf8')} />
+
                 </div>
               </div>
 

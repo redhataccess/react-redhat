@@ -95,14 +95,13 @@ var Root = React.createClass({
         '<link href="vendor/codemirror/codemirror.css" rel="stylesheet" />' +
         '<link href="vendor/codemirror/solarized.css" rel="stylesheet" />' +
         '<link href="vendor/codemirror/syntax.css" rel="stylesheet" />' +
+        '<link href="vendor/typeahead/typeaheadjs.css" rel="stylesheet" />' +
         '<link href="assets/style.css" rel="stylesheet" />' +
-        '<!--[if lt IE 9]>' +
-        '<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>' +
-        '<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>' +
-        '<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>' +
-        '<script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.js"></script>' +
-        '<script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-sham.js"></script>' +
-        '<![endif]-->'
+        '<link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet"/>' +
+        '<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>' +
+        //'<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/select2.min.js"></script>' +
+        '<script src="vendor/select2/dist/js/select2.full.min.js"></script>' +
+        '<script src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>'
     };
 
     return (

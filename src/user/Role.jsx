@@ -8,7 +8,11 @@ var Label           = require('react-bootstrap/Label');
 var Popover         = require('react-bootstrap/Popover');
 var OverlayTrigger  = require('react-bootstrap/OverlayTrigger');
 
+var UdsMixin        = require('../utils/UdsMixin');
+
 module.exports = React.createClass({
+    displayName: "Role",
+    mixins: [UdsMixin],
     // Both role and user are UDS resource objects
     propTypes: {
         role: React.PropTypes.object,
@@ -19,46 +23,28 @@ module.exports = React.createClass({
             parentUser: void 0
         };
     },
-    refreshParentComponent: function() {
-        var self = this;
-        if (this.props.role.resource.parentUser != null) {
-            $.ajax({
-                url: `/user/${this.props.role.resource.parentUser.externalModelId}`,
-                success: (result) => {
-                    self.setState({parentUser: _.first(_.isString(result) ? JSON.parse(result) : result)})
-                }
+    componentDidMount: function() {
+        var self = this,
+            sfId = this.props.role.resource.parentUser && this.props.role.resource.parentUser.externalModelId;
+
+        // Only search if the parentUser is null or is different from the props
+        if (this.props.role.resource.parentUser != null && (this.state.parentUser && this.state.parentUser.externalModelId != sfId)) {
+            this.queryUser({id: this.props.role.resource.parentUser.externalModelId}).done(function(user) {
+                self.setState({parentUser: user});
+            }, function (err) {
+                console.error(err.stack)
             });
         }
     },
-    componentDidMount: function() {
-        this.refreshParentComponent();
-    },
     render: function() {
-        var role, overlayPopover, geoComponent, sbrsComponent;
+        var role, geoComponent, sbrsComponent;
         role = this.props.role;
 
-        //overlayPopover = (
-        //    <Popover key='sbr-popover' title={role.resource.description}>
-        //        <Sbrs sbrs={role.resource.sbrs}></Sbrs>
-        //    </Popover>
-        //);
         geoComponent = role.resource.superRegion != null ? <span>&nbsp;<Geo geo={role.resource.superRegion}></Geo></span> : null;
         sbrsComponent = role.resource.sbrs != null ? <span>&nbsp;<Sbrs sbrs={role.resource.sbrs}></Sbrs></span> : null;
-        //return (
-        //    <span key='role-container'>
-        //        &nbsp;
-        //        <OverlayTrigger key='role-overlay' overlay={overlayPopover} placement='bottom'>
-        //            <div key='role-overlay-container'>
-        //                <RoleDescription {...this.props}></RoleDescription>
-        //                {geoComponent}
-        //                {sbrsComponent}
-        //            </div>
-        //        </OverlayTrigger>
-        //    </span>
-        //)
         return (
             <div key='role-container'>
-                <RoleDescription {...this.props}></RoleDescription>
+                <RoleDescription {...this.props} parentUser={this.state.parentUser}></RoleDescription>
                 {geoComponent}
                 {sbrsComponent}
             </div>

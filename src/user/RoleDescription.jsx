@@ -14,30 +14,9 @@ module.exports = React.createClass({
         role: React.PropTypes.object,
         userId: React.PropTypes.string
     },
-    getInitialState: function() {
-        return {
-            parentUser: void 0
-        };
-    },
-    refreshParentComponent: function() {
-        var self = this;
-        if (this.props.role.resource.parentUser != null) {
-            $.ajax({
-                url: `/user/${this.props.role.resource.parentUser.externalModelId}`,
-                success: (result) => {
-                    self.setState({parentUser: _.first(_.isString(result) ? JSON.parse(result) : result)})
-                }
-            });
-        }
-    },
-    componentDidMount: function() {
-        this.refreshParentComponent();
-    },
-    // If this is a parent role add the user className
-    // TODO -- this assumes font-awesome, but that dependency should be configurable
     genParentUserIcon: function(isParent) {
       if (isParent) {
-          return <i key='fa-users' className='fa fa-users'></i>;
+          return <span className="glyphicon glyphicon-user" aria-hidden="true"></span>
       }
     },
     // TODO this is too complicated and needs to be rewritten
@@ -49,13 +28,13 @@ module.exports = React.createClass({
                 </a>
             )
         } else {
-            if (this.state.parentUser != null) {
+            if (this.props.parentUser != null) {
                 return (
                     <span>
                         <span key={role.resource.description}>{role.resource.description}</span>
                         <span key='colon'>: </span>
-                        <a key={role.resource.parentRole.resource.name} className='label-link' href={`#Roles/${encodeURIComponent(role.resource.parentRole.resource.name)}/${this.state.parentUser.externalModelId}`}>
-                        {this.state.parentUser.resource.fullName}
+                        <a key={role.resource.parentRole.resource.name} className='label-link' href={`#Roles/${encodeURIComponent(role.resource.parentRole.resource.name)}/${this.props.parentUser.externalModelId}`}>
+                        {this.props.parentUser.resource.fullName}
                         </a>
                     </span>
                 )
