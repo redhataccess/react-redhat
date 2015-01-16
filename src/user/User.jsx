@@ -4,8 +4,8 @@ var _       = require('lodash');
 
 var Spacer              = require('../Spacer');
 
-var GeoComponent        = require('./Geo');
-var TimezoneComponent   = require('./Timezone');
+var Geo                 = require('./Geo');
+var Timezone            = require('./Timezone');
 var Role                = require('./Role');
 var OverlayTrigger      = require('react-bootstrap/OverlayTrigger');
 var Popover             = require('react-bootstrap/Popover');
@@ -35,9 +35,9 @@ module.exports = React.createClass({
             popover = (
                 <Popover title={user.fullName}>
                     <div>{user.title}</div>
-                    <GeoComponent geo={user.superRegion}></GeoComponent>
+                    <Geo geo={user.superRegion}></Geo>
                     &nbsp;
-                    <TimezoneComponent timezone={user.timezone}></TimezoneComponent>
+                    <Timezone timezone={user.timezone}></Timezone>
                     &nbsp;
                     <Spacer />
                     {roles}
@@ -59,7 +59,15 @@ module.exports = React.createClass({
             } else if (user.superRegion === 'LATAM') {
                 geoStyle = 'warning';
             }
-            title = <span><b>{`${user.superRegion}: ${user.fullName}`}</b></span>;
+            //title = <span><b>{`${user.superRegion}: ${user.fullName}`}</b></span>;
+            title = (
+                <span>
+                    <b>{user.superRegion}</b>
+                    <span>,&nbsp;{user.fullName}</span>
+                    {user.isManager ? <b>&nbsp;(M)</b> : null}
+                </span>
+            );
+
             skillMatrixMenuItem = user['skillMatrixId'] != null ? <MenuItem onSelect={this.skillMatrix} href={location.hash} key={`${user.kerberos}.skillMatrix`}>Open in SkillMatrix</MenuItem> : null;
             engineerReportMenuItem = user['skillMatrixId'] != null ? <MenuItem onSelect={this.engineerReport} href={location.hash} key={`${user.kerberos}.engineerReport`}>Engineer Report</MenuItem> : null;
             return (
