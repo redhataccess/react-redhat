@@ -88,20 +88,56 @@ module.exports = React.createClass({
   },
   genSkillRows: function() {
     var self = this;
-    return _.map(this.state.skills, (skill) => {
+    return _.map(this.state.skills, (skill, idx) => {
       return (
           <Row>
             <Col xs={4} md={3}>
               <TagSelect
                   label="Skill"
                   value={skill.name}
-                  valueChanged={self.handleSkillNameChange.bind(this, skill)}
+                  valueChanged={self.handleSkillNameChange(idx)}
                   tags={self.state.tags}>
               </TagSelect>
+            </Col>
+            <Col xs={4} md={3}>
+               <Input type="select" label="Operator" value={skill.operator} onChange={self.handleSkillStateChange(idx, "operator")}>
+                 <option value="is">is</option>
+                 <option value=">=">at least</option>
+                 <option value="<=">at most</option>
+               </Input>
+            </Col>
+            <Col xs={4} md={3}>
+              <Input type="select" label="Operator" value={skill.level} onChange={self.handleSkillStateChange(idx, "level")}>
+                <option value="0">beginner</option>
+                <option value="1">intermediate</option>
+                <option value="2">expert</option>
+              </Input>
+            </Col>
+            <Col xs={2} md={1}>
+                <Button bsStyle="danger" onClick={self.removeSkill(idx)} style={{marginTop: "23px"}}>
+                  <Glyph glyph="remove">&nbsp;Remove</Glyph>
+                </Button>
             </Col>
           </Row>
       )
     })
+  },
+  genSkillContainer: function() {
+    return (
+        <Panel style={{marginTop: "20px"}} header={<h3>Filter by skills</h3>}>
+          <Grid style={{width: "100%"}}>
+          {this.genSkillRows()}
+            <Row>
+              <Col xs={12}>
+                  <Button bsStyle="default" onClick={this.addSkill}>
+                    <Glyph glyph="plus"></Glyph>
+                    &nbsp; Add skill
+                  </Button>
+              </Col>
+            </Row>
+          </Grid>
+        </Panel>
+    )
   },
   _makeLikeCond: function(fieldName, fieldValue) {
     return `${fieldName} like "%${fieldValue}%"`
@@ -129,25 +165,21 @@ module.exports = React.createClass({
   //    this.setState(hash);
   //  }).bind(this);
   //},
-  //handleSkillStateChange: function(index, fieldName) {
-  //  return (function(event) {
-  //    var skills;
-  //    skills = this.state.skills;
-  //    skills[index][fieldName] = event.target.value;
-  //    return this.setState({
-  //      skills: skills
-  //    });
-  //  }).bind(this);
-  //},
-  handleSkillNameChange: function(skill) {
-    var skills = this.state.skills;
-    var skillIdx = _.findIndex(this.state.skills, (s) => s.name == skill.name);
-    if (skillIdx != -1) {
-      skills[skillIdx].name = skill.name;
-      this.setState({
-        skills: skills
-      });
-    }
+  handleSkillStateChange: function(index, fieldName) {
+    return (function(event) {
+      var skills;
+      skills = this.state.skills;
+      skills[index][fieldName] = event.target.value;
+      this.setState({ skills: skills });
+    }).bind(this);
+  },
+  handleSkillNameChange: function(index) {
+    return (function(name) {
+      var skills;
+      skills = this.state.skills;
+      skills[index].name = name;
+      this.setState({ skills: skills });
+    }).bind(this);
   },
   addSkill: function() {
     var skills;
@@ -162,7 +194,7 @@ module.exports = React.createClass({
     });
   },
   removeSkill: function(index) {
-    return (function() {
+    return (function () {
       var skills;
       skills = this.state.skills;
       skills.splice(index, 1);
@@ -228,24 +260,21 @@ module.exports = React.createClass({
               <Panel header={header}>
                 <Grid style={{width: "100%"}}>
                   <Row>
-                {this.genLinkStateCol({name: "name", label: "Name"})}
-                {this.genLinkStateCol({name: "email", label: "Email"})}
-                {this.genLinkStateCol({name: "kerberos", label: "kerberos"})}
-                {this.genLinkStateCol({name: "title", label: "Title"})}
-                {this.genHandleValueChangedCol({type: "region", name: "region", label: "Region"})}
-                {this.genHandleValueChangedCol({type: "timezone", name: "timezone", label: "Timezone"})}
-                {this.genHandleValueChangedCol({type: "sbr", name: "sbrs", label: "Sbrs"})}
+                    {this.genLinkStateCol({name: "name", label: "Name"})}
+                    {this.genLinkStateCol({name: "email", label: "Email"})}
+                    {this.genLinkStateCol({name: "kerberos", label: "kerberos"})}
+                    {this.genLinkStateCol({name: "title", label: "Title"})}
+                    {this.genHandleValueChangedCol({type: "region", name: "region", label: "Region"})}
+                    {this.genHandleValueChangedCol({type: "timezone", name: "timezone", label: "Timezone"})}
+                    {this.genHandleValueChangedCol({type: "sbr", name: "sbrs", label: "Sbrs"})}
                   </Row>
                   <Row>
-                {this.genHandleStateChangedCol({name: "ingss", label: "is in gss"})}
-                {this.genHandleStateChangedCol({name: "active", label: "is active"})}
-                {this.genHandleStateChangedCol({name: "manager", label: "is manager"})}
+                    {this.genHandleStateChangedCol({name: "ingss", label: "is in gss"})}
+                    {this.genHandleStateChangedCol({name: "active", label: "is active"})}
+                    {this.genHandleStateChangedCol({name: "manager", label: "is manager"})}
                   </Row>
                 </Grid>
-                <Panel style={{marginTop: "20px"}} header={<h3>Filter by skills</h3>}>
-                  <Grid style={{width: "100%"}}>
-                  </Grid>
-                </Panel>
+                {this.genSkillContainer()}
               </Panel>
             </Row>
             <Row>

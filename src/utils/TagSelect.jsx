@@ -1,44 +1,50 @@
-var React = require('react');
-var Input = require('react-bootstrap/Input');
-var _     = require('lodash');
+var React     = require('react');
+var _         = require('lodash');
+
+var Input     = require('react-bootstrap/Input');
+
+var RandomUtilsMixin  = require('../utils/RandomUtilsMixin');
+var UdsMixin  = require('../utils/UdsMixin');
 
 module.exports = React.createClass({
+  mixins: [UdsMixin, RandomUtilsMixin],
   getInitialState: function() {
     return {
+      id: this.getRandomId(),
       tags: this.props.tags != null ? this.props.tags : []
     };
   },
   componentDidMount: function() {
-    if (this.state.tags.length === 0) {
-      $.get("/user/metadata/tags?where=skillName like \"%25\"", (function(result) {
-        var tags;
-        if ((result != null) && result.length > 0) {
-          console.debug("result is object: " + _.isObject(result));
-          tags = _.isObject(result) ? result : JSON.parse(result);
-          this.setState({ tags: tags });
-          this.activateTypeahead();
-        } else {
-          this.setState({ tags: [] });
-        }
-
-      }).bind(this));
-    } else {
-      this.activateTypeahead();
-    }
+    var self = this;
+    this.loadTags().done(function(tags) {
+      self.setState({tags: tags});
+      self.activateTypeahead();
+    }, function (err) {
+      console.error(err.stack)
+    });
   },
   activateTypeahead: function() {
     var self = this;
-    $(this.refs.tagselect.getDOMNode()).typeahead({ hint: true, highlight: true, minLenght: 1 }, {
-      name: "tag" + this.state.id,
+    $(`#${this.state.id}`).typeahead({
+    //$(this.refs.tagselect.getDOMNode()).typeahead({
+      hint: false,
+      highlight: true,
+      minLength: 1
+    }, {
+      name: "tag",
       displayKey: "name",
-      source: this.substringMatcher(this.state.tags)
+      source: self.substringMatcher(self.state.tags)
     });
-    $(this.refs.tagselect.getDOMNode()).bind("typeahead:selected", (function(a, selected) {
-      self.valueChanged({target: {value: selected.name}});
+    //$(this.refs.tagselect.getDOMNode()).bind("typeahead:selected", (function(a, selected) {
+    $(`#${this.state.id}`).bind("typeahead:selected", (function(a, selected) {
+      self.valueChanged({
+        type: "typeahead",
+        target: { value: selected.name }
+      });
     }));
   },
   valueChanged: function(event) {
-    if (this.props.valueChanged != null) {
+    if (this.props.valueChanged != null && event.type == "typeahead") {
       this.props.valueChanged(event.target.value);
     }
   },
@@ -57,7 +63,7 @@ module.exports = React.createClass({
   render: function() {
     return (
         <div>
-          <Input ref="tagselect" type="text" value={this.props.value} onChange={this.valueChanged} label={this.props.label}/>
+            <Input id={this.state.id} ref="tagselect" type="text" onChange={this.valueChanged} label={this.props.label}/>
         </div>
     );
   }
