@@ -1,13 +1,33 @@
 var React               = require('react');
 var _                   = require('lodash');
 
-var UserSearchOverview  = require('./userSearchOverview');
-
 var Table               = require('react-bootstrap/Table');
 var Panel               = require('react-bootstrap/Panel');
 
+var User                = require('../user/User');
+var Geo                 = require('../user/Geo');
+var Timezone            = require('../user/Timezone');
+var Sbrs                = require('../user/Sbrs');
+
 module.exports = React.createClass({
   displayName: "UserSearchResult",
+  propTypes: {
+    // Optionally pass in a function to determine what happens when a user button is clicked
+    openUser: React.PropTypes.func
+  },
+  genTableData: function(users) {
+      var self = this;
+      return _.map(users, function(user) {
+          return (
+              <tr key={user.externalModelId}>
+                  <td><User openUser={self.props.openUser} resource={user} size="medium"></User></td>
+                  <td><Geo geo={user.resource.superRegion}></Geo></td>
+                  <td><Timezone timezone={user.resource.timezone}></Timezone></td>
+                  <td><Sbrs sbrs={user.resource.sbrs}></Sbrs></td>
+              </tr>
+          )
+      })
+  },
   render: function() {
     if (this.props.users == null) {
       return null;
@@ -33,7 +53,7 @@ module.exports = React.createClass({
                     </tr>
                 </thead>
                 <tbody>
-                {_.map(this.props.users, function(u) { return <UserSearchOverview user={u}></UserSearchOverview>})}
+                {this.genTableData(this.props.users)}
                 </tbody>
             </Table>
         </Panel>

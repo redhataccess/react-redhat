@@ -20,6 +20,10 @@ var Spinner = require('../utils/Spinner');
 
 module.exports = React.createClass({
   mixins: [React.addons.LinkedStateMixin, UdsMixin],
+  propTypes: {
+    // Optionally pass in a function to determine what happens when a user button is clicked
+    openUser: React.PropTypes.func
+  },
   getInitialState: function() {
     return {
       name: "",
@@ -142,6 +146,9 @@ module.exports = React.createClass({
   _makeLikeCond: function(fieldName, fieldValue) {
     return `${fieldName} like "%${fieldValue}%"`
   },
+  _makeBoolCond: function(fieldName, fieldValue) {
+    return `${fieldName} is ${fieldValue}`
+  },
   createQuery: function() {
     var criterias;
     criterias = [
@@ -150,6 +157,9 @@ module.exports = React.createClass({
         this.state.email.trim().length > 0 ? this._makeLikeCond("email", this.state.email) : null,
         this.state.timezone.trim().length > 0 ? this._makeLikeCond("timezone", this.state.timezone) : null,
         this.state.title.trim().length > 0 ? this._makeLikeCond("title", this.state.title) : null,
+        this.state.manager != null ? this._makeBoolCond("isManager", this.state.manager) : null,
+        this.state.ingss != null ? this._makeBoolCond("isInGSS", this.state.ingss) : null,
+        this.state.active != null ? this._makeBoolCond("isActive", this.state.active) : null,
         this.state.kerberos.trim().length > 0 ? `(${this._makeLikeCond("kerberos", this.state.kerberos)} or ${this._makeLikeCond("SSO", this.state.kerberos)})` : null,
         (this.state.sbrs && this.state.sbrs.length > 0) ? this.state.sbrs.map((sbr) => "sbrName is \"" + sbr + "\"").reduce((left, right) => left + " and " + right) : null,
         this.translateSkills()
@@ -157,14 +167,6 @@ module.exports = React.createClass({
     criterias = criterias.filter((x) => x != null);
     return criterias.length > 0 ? criterias.reduce((left, right) => left + " and " + right) : ""
   },
-  //handleEvent: function(fieldName) {
-  //  return (function(event) {
-  //    var hash;
-  //    hash = {};
-  //    hash[fieldName] = event.target.value;
-  //    this.setState(hash);
-  //  }).bind(this);
-  //},
   handleSkillStateChange: function(index, fieldName) {
     return (function(event) {
       var skills;
@@ -236,7 +238,7 @@ module.exports = React.createClass({
     if (this.state.isQuerying == true) {
       return <Spinner spinnerName="wave" cssRequire={false}></Spinner>
     } else {
-      return <UserSearchResult users={this.state.users}></UserSearchResult>
+      return <UserSearchResult {...this.props} users={this.state.users}></UserSearchResult>
     }
   },
   render: function() {
