@@ -208,6 +208,7 @@ module.exports = function (grunt) {
   });
 
   // https://coderwall.com/p/sdokrw/automate-js-releasing-with-grunt
+  // http://stackoverflow.com/questions/13507763/do-i-need-to-publish-to-npm-every-time-i-update-a-package-available-via-git
   grunt.registerTask("release", "Releases a new minor version, pushes, and published", function(type) {
     if (!type) {
       type = "patch";
