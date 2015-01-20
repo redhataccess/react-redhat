@@ -32,71 +32,6 @@ module.exports = React.createClass({
           salesforceUrl: "https://unified.gsslab.rdu2.redhat.com/cli"
       }
     },
-    render: function() {
-        var geoStyle, popover, style, title, user, roles, skillMatrixMenuItem, engineerReportMenuItem ;
-        if (!(this.props.resource && this.props.resource.resource)) {
-            return null;
-        } else {
-            user = this.props.resource.resource;
-        }
-
-        if (user.email == null) {
-            return <span>{user.fullName}</span>
-        } else {
-            roles = _.map(user.roles, (role) => <Role role={role} userId={user.externalModelId}></Role>);
-            popover = (
-                <Popover title={user.fullName}>
-                    <div>{user.title}</div>
-                    <Geo geo={user.superRegion}></Geo>
-                    &nbsp;
-                    <Timezone timezone={user.timezone}></Timezone>
-                    &nbsp;
-                    <Spacer />
-                    {roles}
-                </Popover>
-            );
-
-            style = 'default';
-            if (user.isManager) {
-                style = 'warning';
-            }
-            if (user.superRegion === 'EMEA') {
-                geoStyle = 'primary';
-            } else if (user.superRegion === 'APAC') {
-                geoStyle = 'danger';
-            } else if (user.superRegion === 'India') {
-                geoStyle = 'success';
-            } else if (user.superRegion === 'NA') {
-                geoStyle = 'default';
-            } else if (user.superRegion === 'LATAM') {
-                geoStyle = 'warning';
-            }
-            //title = <span><b>{`${user.superRegion}: ${user.fullName}`}</b></span>;
-            title = (
-                <span>
-                    {user.superRegion != null ? <b>{user.superRegion},&nbsp;</b>: null}
-                    <span>{user.fullName}</span>
-                    {user.isManager ? <b>&nbsp;(M)</b> : null}
-                </span>
-            );
-
-            skillMatrixMenuItem = user['skillMatrixId'] != null ? <MenuItem onSelect={this.skillMatrix} href={location.hash} key="skillMatrix">Open in SkillMatrix</MenuItem> : null;
-            engineerReportMenuItem = user['skillMatrixId'] != null ? <MenuItem onSelect={this.engineerReport} href={location.hash} key="engineerReport">Engineer Report</MenuItem> : null;
-            // Was dropdown button, now split button
-            return (
-                <OverlayTrigger trigger='hover' placement='right' overlay={popover}>
-                    <SplitButton bsStyle={style} bsSize={this.props.size || 'small'} title={title} onClick={this.openUser}>
-                        <MenuItem onSelect={this.sendEmail} href={location.hash} key="email">Send E-Mail</MenuItem>
-                        <MenuItem onSelect={this.salesForce} href={location.hash} key="salesforce">Open in Salesforce</MenuItem>
-                        {/*TODO -- disabling the calendar link until I can generate it in the form of a UQL query like: (kerberos%20like%20%22%25smendenh%25%22%20or%20SSO%20like%20%22%25smendenh%25%22)*/}
-                        {/*<MenuItem onSelect={this.calendar} href={location.hash} key="calendar">View Calendar</MenuItem>*/}
-                        {skillMatrixMenuItem }
-                        {engineerReportMenuItem }
-                    </SplitButton>
-                </OverlayTrigger>
-            );
-        }
-    },
     openUser: function() {
         var user = this.props.resource.resource;
         if (this.props.openUser != null) {
@@ -164,5 +99,70 @@ module.exports = React.createClass({
             }
         }
         return false;
+    },
+    render: function() {
+        var geoStyle, popover, style, title, user, roles, skillMatrixMenuItem, engineerReportMenuItem ;
+        if (!(this.props.resource && this.props.resource.resource)) {
+            return null;
+        } else {
+            user = this.props.resource.resource;
+        }
+
+        if (user.email == null) {
+            return <span>{user.fullName}</span>
+        } else {
+            roles = _.map(user.roles, (role) => <Role role={role} userId={user.externalModelId}></Role>);
+            popover = (
+                <Popover title={user.fullName}>
+                    <div>{user.title}</div>
+                    <Geo geo={user.superRegion}></Geo>
+                &nbsp;
+                    <Timezone timezone={user.timezone}></Timezone>
+                &nbsp;
+                    <Spacer />
+                    {roles}
+                </Popover>
+            );
+
+            style = 'default';
+            if (user.isManager) {
+                style = 'warning';
+            }
+            if (user.superRegion === 'EMEA') {
+                geoStyle = 'primary';
+            } else if (user.superRegion === 'APAC') {
+                geoStyle = 'danger';
+            } else if (user.superRegion === 'India') {
+                geoStyle = 'success';
+            } else if (user.superRegion === 'NA') {
+                geoStyle = 'default';
+            } else if (user.superRegion === 'LATAM') {
+                geoStyle = 'warning';
+            }
+            //title = <span><b>{`${user.superRegion}: ${user.fullName}`}</b></span>;
+            title = (
+                <span>
+                    {user.superRegion != null ? <b>{user.superRegion},&nbsp;</b>: null}
+                    <span>{user.fullName}</span>
+                    {user.isManager ? <b>&nbsp;(M)</b> : null}
+                </span>
+            );
+
+            skillMatrixMenuItem = user['skillMatrixId'] != null ? <MenuItem onSelect={this.skillMatrix} href={location.hash} key="skillMatrix">Open in SkillMatrix</MenuItem> : null;
+            engineerReportMenuItem = user['skillMatrixId'] != null ? <MenuItem onSelect={this.engineerReport} href={location.hash} key="engineerReport">Engineer Report</MenuItem> : null;
+            // Was dropdown button, now split button
+            return (
+                <OverlayTrigger trigger='hover' placement='right' overlay={popover}>
+                    <SplitButton bsStyle={style} bsSize={this.props.size || 'small'} title={title} onClick={this.openUser}>
+                        <MenuItem onSelect={this.sendEmail} href={location.hash} key="email">Send E-Mail</MenuItem>
+                        <MenuItem onSelect={this.salesForce} href={location.hash} key="salesforce">Open in Salesforce</MenuItem>
+                        {/*TODO -- disabling the calendar link until I can generate it in the form of a UQL query like: (kerberos%20like%20%22%25smendenh%25%22%20or%20SSO%20like%20%22%25smendenh%25%22)*/}
+                        {/*<MenuItem onSelect={this.calendar} href={location.hash} key="calendar">View Calendar</MenuItem>*/}
+                        {skillMatrixMenuItem }
+                        {engineerReportMenuItem }
+                    </SplitButton>
+                </OverlayTrigger>
+            );
+        }
     }
 });
