@@ -10,16 +10,16 @@ describe('Comment', function () {
         var commentResource=[
             {
                 "resource": {
-                    "text": "It seems working ok on limited testing:\n\nuid=1000(test) gid=1000(test) groups=1000(test) context=system_u:system_r:httpd_t:s0\n\nwhen running shell_exec('id') from PHP with mpm-itk and \"AssignUserID test test\" @ virtualhost definition. Need to do wider feature/load -testing but looks good so far.",
+                    "text": "It seems working ok on limited testing.",
                     "createdBy": {
                         "resource": {
-                            "fullName": "Mattila, Toni"
+                            "fullName": "User, Test"
                         },
                         "resourceReliability": "Fresh"
                     },
                     "lastModifiedBy": {
                         "resource": {
-                            "fullName": "Mattila, Toni"
+                            "fullName": "User, Test"
                         },
                         "resourceReliability": "Fresh"
                     },
@@ -38,7 +38,7 @@ describe('Comment', function () {
           <Comment id="a0aA000000CZco6IAD" key="a0aA000000CZco6IAD" comment={comment}></Comment>
         );
 
-        assert.ok(instance.getDOMNode().children[0].innerText.match("Mattila, Toni"));
+        assert.ok(instance.getDOMNode().children[0].innerText.match("User, Test"));
         assert.ok(instance.getDOMNode().children[1].innerText.match("It seems working ok on limited testing"));
         
         

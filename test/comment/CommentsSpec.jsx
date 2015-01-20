@@ -15,16 +15,16 @@ describe('Comments', function () {
             [
                 {
                     "resource": {
-                        "text": "It seems working ok on limited testing:\n\nuid=1000(test) gid=1000(test) groups=1000(test) context=system_u:system_r:httpd_t:s0\n\nwhen running shell_exec('id') from PHP with mpm-itk and \"AssignUserID test test\" @ virtualhost definition. Need to do wider feature/load -testing but looks good so far.",
+                        "text": "It seems working ok on limited testing.",
                         "createdBy": {
                             "resource": {
-                                "fullName": "Mattila, Toni"
+                                "fullName": "User, Test"
                             },
                             "resourceReliability": "Fresh"
                         },
                         "lastModifiedBy": {
                             "resource": {
-                                "fullName": "Mattila, Toni"
+                                "fullName": "User, Test"
                             },
                             "resourceReliability": "Fresh"
                         },
@@ -38,7 +38,7 @@ describe('Comments', function () {
                 },
                 {
                     "resource": {
-                        "text": "Bug report changed to ON_QA status by Errata System.\nA QE request has been submitted for advisory RHBA-2014:18431-01\nhttps://errata.devel.redhat.com/advisory/18431",
+                        "text": "Bug report changed to ON_QA status ",
                         "createdBy": {
                             "resource": {
                                 "fullName": "Unknown"
@@ -61,16 +61,16 @@ describe('Comments', function () {
                 },
                 {
                     "resource": {
-                        "text": "Hi,\n\nSystem is RHEL 7 x86_64.",
+                        "text": "Hi,\n\nSystem is good.",
                         "createdBy": {
                             "resource": {
-                                "fullName": "Mattila, Toni"
+                                "fullName": "User, Test"
                             },
                             "resourceReliability": "Fresh"
                         },
                         "lastModifiedBy": {
                             "resource": {
-                                "fullName": "Mattila, Toni"
+                                "fullName": "User, Test"
                             },
                             "resourceReliability": "Fresh"
                         },
@@ -86,7 +86,9 @@ describe('Comments', function () {
 
 
       
-       var stub=sinon.stub($, 'ajax').returns(comment);
+       var callBack=sinon.stub($, 'ajax').returns(comment);
+        
+        
         var instance = ReactTestUtils.renderIntoDocument(
             <Comments  caseNumber="1090296"></Comments>
         );
