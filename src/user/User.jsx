@@ -116,9 +116,9 @@ module.exports = React.createClass({
                 <Popover title={user.fullName}>
                     <div>{user.title}</div>
                     <Geo geo={user.superRegion}></Geo>
-                &nbsp;
+                    &nbsp;
                     <Timezone timezone={user.timezone}></Timezone>
-                &nbsp;
+                    &nbsp;
                     <Spacer />
                     {roles}
                 </Popover>
