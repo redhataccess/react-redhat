@@ -13,6 +13,13 @@ var Sbrs        = require('../../cjs/user/Sbrs');
 var UserSearch      = require('../../cjs/usersearch/UserSearch');
 var TimezoneSelect  = require('../../cjs/usersearch/TimezoneSelect');
 
+var Timestamp      = require('../../cjs/comment/Timestamp');
+var SlaAttainment  = require('../../cjs/comment/SlaAttainment');
+var CommentType  = require('../../cjs/comment/CommentType');
+var Comment  = require('../../cjs/comment/Comment');
+var Comments  = require('../../cjs/comment/Comments');
+
+
 var IS_MOBILE = typeof navigator !== 'undefined' && (
   navigator.userAgent.match(/Android/i)
     || navigator.userAgent.match(/webOS/i)

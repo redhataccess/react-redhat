@@ -95,6 +95,24 @@ Mixin = {
 
         return deferred.promise;
     },
+    getComments: function(opts) {
+        var caseNumber = opts.caseNumber || new Error("You must supply a case Number to the arguments hash.");
+        var deferred = Q.defer();
+        Q($.get("/case/"+caseNumber+"/comments"))
+            .then(function(result) {
+                var comments;
+                if (result != null) {
+                    comments = result;
+                    deferred.resolve(comments);
+                } else {
+                    deferred.resolve([]);
+                }
+            })
+            .catch(function(err) { deferred.reject(err); })
+            .done();
+
+        return deferred.promise;
+    },
     pairCriterias: function(baseQuery, sbrCriterias, skillCriterias) {
         var i, _i, _ref1, _results;
         if (sbrCriterias.length === 0 && skillCriterias.length === 0) {

@@ -89,6 +89,26 @@ var ComponentsPage = React.createClass({
                   <p>Select a Timezone</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/usersearch/TimezoneSelectExample.js', 'utf8')} />
 
+                  <h3 id="timestamp">Timestamp</h3>
+                  <p>Displays the Timestamp</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/comment/Timestamp.js', 'utf8')} />
+
+                  <h3 id="slaAttainment">SLA Attainment</h3>
+                  <p>Displays the SLA attainment</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/comment/SlaAttainment.js', 'utf8')} />
+
+                  <h3 id="commentType">Comment Type</h3>
+                  <p>Displays the comment Type</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/comment/CommentType.js', 'utf8')} />
+
+                  <h3 id="comment">Comment</h3>
+                  <p>Displays one comment</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/comment/Comment.js', 'utf8')} />
+
+                  <h3 id="comments">Comments</h3>
+                  <p>Displays all the comments</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/comment/Comments.js', 'utf8')} />
+
                 </div>
               </div>
 
