@@ -9,6 +9,7 @@ var Popover         = require('react-bootstrap/Popover');
 var OverlayTrigger  = require('react-bootstrap/OverlayTrigger');
 
 var UdsMixin        = require('../utils/UdsMixin');
+var Spacer          = require('../Spacer');
 
 module.exports = React.createClass({
     displayName: "Role",

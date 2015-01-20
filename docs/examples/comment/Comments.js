@@ -1,6 +1,6 @@
 var instance = (
     <div>
-        <Comments  caseNumber="1090296"></Comments>
+        <Comments caseNumber="1090296" limit={5}></Comments>
     </div>
 );
 

@@ -77,6 +77,10 @@ var ComponentsPage = React.createClass({
                   <p>Display the Timezone of a User or Resource</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/user/Timezone.js', 'utf8')} />
 
+                  <h3 id="timezoneSelect">Timezone Select</h3>
+                  <p>Select a Timezone</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/usersearch/TimezoneSelectExample.js', 'utf8')} />
+
                   <h3 id="sbrs">Sbrs</h3>
                   <p>Display the Sbrs of a User or Resource</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/user/Sbrs.js', 'utf8')} />
@@ -85,9 +89,11 @@ var ComponentsPage = React.createClass({
                   <p>Search for current users</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/usersearch/UserSearchExample.js', 'utf8')} />
 
-                  <h3 id="timezoneSelect">Timezone Select</h3>
-                  <p>Select a Timezone</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/usersearch/TimezoneSelectExample.js', 'utf8')} />
+                </div>
+
+                {/* Case */}
+                <div className="bs-docs-section">
+                  <h1 id="cases" className="page-header">Case Related Components</h1>
 
                   <h3 id="timestamp">Timestamp</h3>
                   <p>Displays the Timestamp</p>
@@ -108,8 +114,8 @@ var ComponentsPage = React.createClass({
                   <h3 id="comments">Comments</h3>
                   <p>Displays all the comments</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/comment/Comments.js', 'utf8')} />
-
                 </div>
+
               </div>
 
               <div className="col-md-3">
@@ -123,10 +129,19 @@ var ComponentsPage = React.createClass({
                     activeHref={this.state.activeNavItemHref}
                     onSelect={this.handleNavItemSelect}
                     ref="sideNav">
-                    <SubNav href="#users" key={1} text="Users">
-                      <NavItem href="#geo" key={2}>Geo</NavItem>
-                      <NavItem href="#timezone" key={3}>Timezone</NavItem>
-                      <NavItem href="#sbrs" key={4}>Sbrs</NavItem>
+                    <SubNav href="#users" key="users" text="Users">
+                      <NavItem href="#geo" key="geo">Geo</NavItem>
+                      <NavItem href="#timezone" key="timezone">Timezone</NavItem>
+                      <NavItem href="#timezoneSelect" key="timezoneSelect">Timezone Select</NavItem>
+                      <NavItem href="#sbrs" key="sbrs">Sbrs</NavItem>
+                      <NavItem href="#userSearch" key="userSearch">User Search</NavItem>
+                    </SubNav>
+                    <SubNav href="#cases" key="cases" text="Cases">
+                      <NavItem href="#timestamp" key="timestamp">Timestamp</NavItem>
+                      <NavItem href="#slaAttainment" key="slaAttainment">SLA Attainment</NavItem>
+                      <NavItem href="#commentType" key="commentType">Comment Type</NavItem>
+                      <NavItem href="#comment" key="comment">Comment</NavItem>
+                      <NavItem href="#comments" key="comments">Comments</NavItem>
                     </SubNav>
                     {/*<NavItem href="#panels" key={5}>Panels</NavItem>*/}
                   </Nav>

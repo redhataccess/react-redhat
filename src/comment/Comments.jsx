@@ -17,6 +17,10 @@ var Component = React.createClass({
         };
     },
     genCommentElements: function() {
+        // If the limit is defined (mainly for testing and docs) take the first 0...limit comments for display
+        if (_.isNumber(this.props.limit)) {
+            return _.map(_.values(this.state.comments).slice(0, this.props.limit), (c) => <Comment id={c['externalModelId']} key={c['externalModelId']} comment={c}></Comment>);
+        }
         return _.map(this.state.comments, (c) => <Comment id={c['externalModelId']} key={c['externalModelId']} comment={c}></Comment>);
     },
     queryComments: function(props) {
