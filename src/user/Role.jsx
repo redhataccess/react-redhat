@@ -44,7 +44,7 @@ module.exports = React.createClass({
         geoComponent = role.resource.superRegion != null ? <span>&nbsp;<Geo geo={role.resource.superRegion}></Geo></span> : null;
         sbrsComponent = role.resource.sbrs != null ? <span>&nbsp;<Sbrs sbrs={role.resource.sbrs}></Sbrs></span> : null;
         return (
-            <div key='role-container'>
+            <div key='role-container' className="role-container">
                 <RoleDescription {...this.props} parentUser={this.state.parentUser}></RoleDescription>
                 {geoComponent}
                 {sbrsComponent}
