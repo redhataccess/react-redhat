@@ -1,5 +1,5 @@
 var openUser = function(user) {
-  alert("You clicked on " + user.fullName + "!");
+  alert("You clicked on " + user.resource.fullName + "!");
 };
 
 var userSearchInstance = (

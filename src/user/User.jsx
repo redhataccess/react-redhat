@@ -35,7 +35,7 @@ module.exports = React.createClass({
     openUser: function() {
         var user = this.props.resource.resource;
         if (this.props.openUser != null) {
-            this.props.openUser(user);
+            this.props.openUser(this.props.resource);
         } else {
             $(location).attr('href', "#User/" + (_.first(user.sso)));
         }
@@ -44,7 +44,7 @@ module.exports = React.createClass({
     calendar: function() {
         var user = this.props.resource.resource;
         if (this.props.calendar != null) {
-            this.props.calendar(user);
+            this.props.calendar(this.props.resource);
         } else {
             $(location).attr('href', "#Calendar/" + (_.first(user.sso)));
         }
@@ -53,7 +53,7 @@ module.exports = React.createClass({
     sendEmail: function() {
         var user = this.props.resource.resource;
         if (this.props.sendEmail != null) {
-            this.props.sendEmail(user);
+            this.props.sendEmail(this.props.resource);
         } else {
             $(location).attr('href', "mailto:" + (_.find(user.email, function(email) {
                 return email.addressType = 'PRIMARY';
@@ -64,7 +64,7 @@ module.exports = React.createClass({
     salesForce: function() {
         var user = this.props.resource;
         if (this.props.salesForce != null) {
-            this.props.salesForce(user);
+            this.props.salesForce(this.props.resource);
         } else {
             window.open(this.props.salesforceUrl + "/" + user.externalModelId, '_blank');
         }
@@ -73,7 +73,7 @@ module.exports = React.createClass({
     skillMatrix: function() {
         var user = this.props.resource;
         if (this.props.skillMatrix != null) {
-            this.props.skillMatrix(user);
+            this.props.skillMatrix(this.props.resource);
         } else {
             window.open(this.props.skillMatrixUrl + "/member.jsf?id=" + user.resource.skillMatrixId, '_blank');
         }
@@ -86,7 +86,7 @@ module.exports = React.createClass({
         var hash,
             user = this.props.resource.resource;
         if (this.props.engineerReport != null) {
-            this.props.engineerReport(user);
+            this.props.engineerReport(this.props.resource);
         } else {
             if (moment().month() < 12) {
                 hash = "#EngineerReport/" + user.kerberos + "/" + (moment().year()) + "-" + (this.formatMonth(moment().month() + 1)) + "-01/" + (moment().year()) + "-" + (this.formatMonth(moment().month() + 2)) + "-01";
