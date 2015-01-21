@@ -63,6 +63,7 @@ Mixin = {
         var query = opts.query || new Error("You must supply a query to the arguments hash.");
         var limit = opts.limit || 20;
         var deferred = Q.defer();
+        var results;
 
         var criterias, sbrCriteriaRegex, sbrCriterias, skillCriteriaRegex, skillCriterias;
         sbrCriteriaRegex = /sbrName is "[^"]+"/g;
@@ -84,9 +85,9 @@ Mixin = {
         $.when.apply(this, criterias.map(function(criteria) {
             console.debug("Mapping criteria: " + criteria);
             return $.ajax("/user?where=" + criteria + "&limit=" + limit);
-        })).done((function(results) {
-            if (results != null && results.length > 0) {
-                results = _.chain(results).filter(_.isArray).value();
+        })).done((function() {
+            if (arguments != null && arguments.length > 0) {
+                results = _.chain(arguments).filter(_.isArray).value();
                 deferred.resolve(_.chain(results).flatten().sort(function(u) {return u.resource.lastName}).value());
             } else {
                 deferred.resolve([]);
