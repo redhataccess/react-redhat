@@ -5,9 +5,14 @@ var regions = ["India", "NA", "LATAM", "EMEA", "APAC"];
 module.exports = React.createClass({
     componentDidMount: function() {
         var self = this;
-        $(this.refs.region.getDOMNode()).select2();
+        //$(this.refs.region.getDOMNode()).select2();
+        ////$("#region").on("change", this.valueChanged);
+        //$(this.refs.region.getDOMNode()).on("change", function() {
+        //    self.props.valueChanged.call(null, $(this).val())
+        //});
+        $(this.refs.region.getDOMNode()).chosen();
         //$("#region").on("change", this.valueChanged);
-        $(this.refs.region.getDOMNode()).on("change", function() {
+        $(this.refs.region.getDOMNode()).chosen().change(function() {
             self.props.valueChanged.call(null, $(this).val())
         });
     },
@@ -29,7 +34,6 @@ module.exports = React.createClass({
         }
     },
     render: function() {
-
         return (
             <div className="form-group">
                 {this.genLabel(this.props.label)}

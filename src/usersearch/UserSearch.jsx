@@ -60,7 +60,7 @@ module.exports = React.createClass({
   },
   handleStateChange: function(fieldName) {
     return (function(state) {
-      console.debug(`${fieldName} updated to ${state}`);
+      //console.debug(`${fieldName} updated to ${state}`);
       var hash = {};
       hash[fieldName] = state;
       this.setState(hash);

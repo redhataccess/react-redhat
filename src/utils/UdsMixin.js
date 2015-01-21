@@ -86,8 +86,8 @@ Mixin = {
             return $.ajax("/user?where=" + criteria + "&limit=" + limit);
         })).done((function(results) {
             if (results != null && results.length > 0) {
-                results = _.isArray(results) ? results : [results];
-                deferred.resolve(_.chain(results).sort(function(u) {return u.resource.lastName}).value());
+                results = _.chain(results).filter(_.isArray).value();
+                deferred.resolve(_.chain(results).flatten().sort(function(u) {return u.resource.lastName}).value());
             } else {
                 deferred.resolve([]);
             }

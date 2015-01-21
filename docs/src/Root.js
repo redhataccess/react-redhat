@@ -96,11 +96,13 @@ var Root = React.createClass({
         '<link href="vendor/codemirror/solarized.css" rel="stylesheet" />' +
         '<link href="vendor/codemirror/syntax.css" rel="stylesheet" />' +
         '<link href="vendor/typeahead/typeaheadjs.css" rel="stylesheet" />' +
+        '<link href="vendor/chosen_v1.3.0/chosen.min.css" rel="stylesheet" />' +
         '<link href="assets/style.css" rel="stylesheet" />' +
-        '<link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet"/>' +
         '<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>' +
         //'<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/select2.min.js"></script>' +
-        '<script src="vendor/select2/dist/js/select2.full.min.js"></script>' +
+        //'<link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet"/>' +
+        //'<script src="vendor/select2/dist/js/select2.full.min.js"></script>' +
+        '<script src="vendor/chosen_v1.3.0/chosen.jquery.min.js"></script>' +
         '<script src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>'
     };
 

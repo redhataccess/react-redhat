@@ -1,13 +1,16 @@
 var React = require('react');
-
-//require('select2');
+var _     = require('lodash');
 
 module.exports = React.createClass({
   componentDidMount: function() {
     var self = this;
-    $(this.refs.selectmultiple.getDOMNode()).select2();
-    //$(this.refs.selectmultiple.getDOMNode()).on("change", this.valueChanged);
-    $(this.refs.selectmultiple.getDOMNode()).on("change", function() {
+    //$(this.refs.selectmultiple.getDOMNode()).select2();
+    //$(this.refs.selectmultiple.getDOMNode()).on("change", function() {
+    //  self.props.valueChanged.call(null, $(this).val())
+    //});
+    //http://harvesthq.github.io/chosen/options.html
+    $(this.refs.selectmultiple.getDOMNode()).chosen({multiple: true});
+    $(this.refs.selectmultiple.getDOMNode()).chosen().change(function() {
       self.props.valueChanged.call(null, $(this).val())
     });
   },
@@ -20,8 +23,8 @@ module.exports = React.createClass({
     }
     return null;
   },
-  genOptions: function(values) {
-    return Object.keys(values).map(((key) => <option value={key}>{values[key]}</option>))
+  genOptions: function(sbrs) {
+    return _.map(sbrs, (sbr) => <option value={sbr}>{sbr}</option>)
   },
   valueChanged: function(event) {
     if (this.props.valueChanged != null) {
@@ -29,15 +32,13 @@ module.exports = React.createClass({
     }
   },
   render: function() {
-    if (this.props.values != null) {
-      return (
-          <div>
-          {this.genLabel(this.props.label)}
-            <select ref="selectmultiple" className="form-control" multiple={true} style={{width: "100%"}}>
-            {this.genOptions(this.props.values)}
-            </select>
-          </div>
-      );
-    }
+    return (
+      <div>
+        {this.genLabel(this.props.label)}
+        <select ref="selectmultiple" className="form-control" multiple={true} style={{width: "100%"}}>
+          {this.genOptions(this.props.values)}
+        </select>
+      </div>
+    );
   }
 });

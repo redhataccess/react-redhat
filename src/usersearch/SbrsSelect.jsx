@@ -2,6 +2,7 @@ var React           = require('react');
 var _               = require('lodash');
 
 var SelectMultiple  = require('../utils/SelectMultiple');
+var Spinner         = require('../utils/Spinner');
 var UdsMixin        = require('../utils/UdsMixin');
 
 module.exports = React.createClass({
@@ -9,24 +10,31 @@ module.exports = React.createClass({
     mixins: [UdsMixin],
     getInitialState: function() {
         return {
-            sbrs: []
+            sbrs: [],
+            loading: false
         };
     },
     componentDidMount: function() {
         var self = this;
+        this.setState({loading: true});
         this.loadSbrs().done(function(sbrs) {
-            self.setState({sbrs: sbrs});
+            console.debug("Ajax found " + sbrs.length + " sbrs");
+            self.setState({sbrs: sbrs, loading: false});
         }, function (err) {
             console.error(err.stack)
         });
     },
     render: function() {
-        var sbrs = {};
-        this.state.sbrs.forEach((sbr) => sbrs[sbr] = sbr );
+        if (this.state.loading == true) {
+            return <Spinner></Spinner>;
+        }
+        if (this.state.sbrs && this.state.sbrs.length == 0) {
+            return null;
+        }
         return (
             <SelectMultiple
                 label={this.props.label}
-                values={sbrs}
+                values={this.state.sbrs}
                 valueChanged={this.props.valueChanged}>
             </SelectMultiple>
         )
