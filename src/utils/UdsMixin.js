@@ -65,6 +65,7 @@ Mixin = {
     },
     queryUsers: function(opts) {
         var query = opts.query || new Error("You must supply a query to the arguments hash.");
+        var self = this;
         var limit = opts.limit || 20;
         var deferred = Q.defer();
         var results;
@@ -88,7 +89,7 @@ Mixin = {
         // TODO -- this needs to be rewritten to Q style promises to catch errors
         $.when.apply(this, criterias.map(function(criteria) {
             console.debug("Mapping criteria: " + criteria);
-            return $.ajax("/user?where=" + criteria + "&limit=" + limit);
+            return $.ajax(self._calculatePrefix() + "/user?where=" + criteria + "&limit=" + limit);
         })).done((function() {
             if (arguments != null && arguments.length > 0) {
                 results = _.chain(arguments).filter(_.isArray).value();

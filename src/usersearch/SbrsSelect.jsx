@@ -15,26 +15,30 @@ module.exports = React.createClass({
         };
     },
     componentDidMount: function() {
-        var self = this;
-        this.setState({loading: true});
-        this.loadSbrs().done(function(sbrs) {
-            console.debug("Ajax found " + sbrs.length + " sbrs");
-            self.setState({sbrs: sbrs, loading: false});
-        }, function (err) {
-            console.error(err.stack)
-        });
+        if (this.state.values == null || this.state.values.length == 0) {
+            var self = this;
+            this.setState({loading: true});
+            this.loadSbrs().then(function(sbrs) {
+                self.setState({sbrs: sbrs});
+            }).catch(function (err) {
+                console.error(err.stack)
+            }).done(function() {
+                self.setState({loading: false});
+            });
+        }
     },
     render: function() {
+        var sbrs = this.props.values || this.state.sbrs;
         if (this.state.loading == true) {
             return <Spinner></Spinner>;
         }
-        if (this.state.sbrs && this.state.sbrs.length == 0) {
+        if (sbrs && sbrs.length == 0) {
             return null;
         }
         return (
             <SelectMultiple
                 label={this.props.label}
-                values={this.state.sbrs}
+                values={sbrs}
                 valueChanged={this.props.valueChanged}>
             </SelectMultiple>
         )
