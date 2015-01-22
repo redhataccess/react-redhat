@@ -1,12 +1,16 @@
 Q = require('q');
-// Use long stack trace support
+Q.longStackSupport = true;
 _ = require('lodash');
 
 Mixin = {
+    _calculatePrefix: function () {
+        return window.redHatUrlPrefix != null ? window.redHatUrlPrefix  : '';
+    },
     loadTags: function() {
         var deferred = Q.defer();
 
-        Q($.get("/user/metadata/tags?where=skillName like \"%25\""))
+
+        Q($.get(this._calculatePrefix() + "/user/metadata/tags?where=skillName like \"%25\""))
         .then(function(result) {
             var tags;
             if (result != null && result.length > 0) {
@@ -24,7 +28,7 @@ Mixin = {
     loadSbrs: function() {
         var deferred = Q.defer();
 
-        Q($.get("/user/metadata/sbrs?where=sbrName like \"%25%25\""))
+        Q($.get(this._calculatePrefix() + "/user/metadata/sbrs?where=sbrName like \"%25%25\""))
         .then(function(result) {
             var sbrs;
             if (result != null && result.length > 0) {
@@ -43,7 +47,7 @@ Mixin = {
         var id = opts.id || new Error("You must supply an id to the arguments hash.");
         var deferred = Q.defer();
 
-        Q($.get("/user/" + id))
+        Q($.get(this._calculatePrefix() + "/user/" + id))
             .then(function(result) {
                 var user;
                 if (result != null) {
@@ -99,7 +103,7 @@ Mixin = {
     getComments: function(opts) {
         var caseNumber = opts.caseNumber || new Error("You must supply a case Number to the arguments hash.");
         var deferred = Q.defer();
-        Q($.get("/case/"+caseNumber+"/comments"))
+        Q($.get(this._calculatePrefix() + "/case/"+caseNumber+"/comments"))
             .then(function(result) {
                 var comments;
                 if (result != null) {

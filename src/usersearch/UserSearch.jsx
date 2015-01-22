@@ -67,19 +67,21 @@ module.exports = React.createClass({
     }).bind(this);
   },
   genHandleValueChangedCol: function(opts) {
-    var Component = null;
+    var Component = null,
+        values = null;
     if (opts.type == "region") {
       Component = RegionSelect;
     } else if (opts.type == "timezone") {
       Component = TimezoneSelect;
     } else if (opts.type == "sbr") {
       Component = SbrsSelect;
+      values = this.props.sbrs && this.props.sbrs.length > 0 ? this.props.sbrs : null;
     } else {
       throw Error(`Please pass in a valid component type, ${opts.type} is not valid`)
     }
     return (
         <Col xs={opts.xs || 6} md={opts.md || 3}>
-          <Component valueChanged={this.handleStateChange(opts.name)} label={opts.label}></Component>
+          <Component values={values} valueChanged={this.handleStateChange(opts.name)} label={opts.label}></Component>
         </Col>
     )
   },
