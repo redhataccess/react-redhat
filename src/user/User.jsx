@@ -12,6 +12,7 @@ var OverlayTrigger      = require('react-bootstrap/OverlayTrigger');
 var Popover             = require('react-bootstrap/Popover');
 var SplitButton         = require('react-bootstrap/SplitButton');
 var MenuItem            = require('react-bootstrap/MenuItem');
+var Glyph               = require('react-bootstrap/Glyphicon');
 
 module.exports = React.createClass({
     displayName: 'User',
@@ -101,7 +102,7 @@ module.exports = React.createClass({
         return false;
     },
     render: function() {
-        var geoStyle, popover, style, title, user, roles, skillMatrixMenuItem, engineerReportMenuItem ;
+        var geoStyle, popover, style, title, user, roles, skillMatrixMenuItem, engineerReportMenuItem, actionsPopover;
         if (!(this.props.resource && this.props.resource.resource)) {
             return null;
         } else {
@@ -141,27 +142,45 @@ module.exports = React.createClass({
             }
             //title = <span><b>{`${user.superRegion}: ${user.fullName}`}</b></span>;
             title = (
-                <span>
+                <span onClick={this.openUser}>
                     {user.superRegion != null ? <b>{user.superRegion},&nbsp;</b>: null}
                     <span>{user.fullName}</span>
                     {user.isManager ? <b>&nbsp;(M)</b> : null}
                 </span>
             );
 
-            skillMatrixMenuItem = user['skillMatrixId'] != null ? <MenuItem onSelect={this.skillMatrix} href={location.hash} key="skillMatrix">Open in SkillMatrix</MenuItem> : null;
-            engineerReportMenuItem = user['skillMatrixId'] != null ? <MenuItem onSelect={this.engineerReport} href={location.hash} key="engineerReport">Engineer Report</MenuItem> : null;
-            // Was dropdown button, now split button
-            return (
-                <OverlayTrigger trigger='hover' placement='right' overlay={popover}>
-                    <SplitButton bsStyle={style} bsSize={this.props.size || 'small'} title={title} onClick={this.openUser}>
-                        <MenuItem onSelect={this.sendEmail} href={location.hash} key="email">Send E-Mail</MenuItem>
-                        <MenuItem onSelect={this.salesForce} href={location.hash} key="salesforce">Open in Salesforce</MenuItem>
-                        {/*TODO -- disabling the calendar link until I can generate it in the form of a UQL query like: (kerberos%20like%20%22%25smendenh%25%22%20or%20SSO%20like%20%22%25smendenh%25%22)*/}
-                        {/*<MenuItem onSelect={this.calendar} href={location.hash} key="calendar">View Calendar</MenuItem>*/}
+
+            //skillMatrixMenuItem = user['skillMatrixId'] != null ? <MenuItem onSelect={this.skillMatrix} href={location.hash} key="skillMatrix">Open in SkillMatrix</MenuItem> : null;
+            //engineerReportMenuItem = user['skillMatrixId'] != null ? <MenuItem onSelect={this.engineerReport} href={location.hash} key="engineerReport">Engineer Report</MenuItem> : null;
+            skillMatrixMenuItem = user['skillMatrixId'] != null ? <li><a onClick={this.skillMatrix} href={location.hash} key="skillMatrix">Open in SkillMatrix</a></li> : null;
+            engineerReportMenuItem = user['skillMatrixId'] != null ? <li><a onClick={this.engineerReport} href={location.hash} key="engineerReport">Engineer Report</a></li> : null;
+
+            //<MenuItem onSelect={this.sendEmail} href={location.hash} key="email">Send E-Mail</MenuItem>
+            //<MenuItem onSelect={this.salesForce} href={location.hash} key="salesforce">Open in Salesforce</MenuItem>
+//{/*TODO -- disabling the calendar link until I can generate it in the form of a UQL query like: (kerberos%20like%20%22%25smendenh%25%22%20or%20SSO%20like%20%22%25smendenh%25%22)*/}
+//{/*<MenuItem onSelect={this.calendar} href={location.hash} key="calendar">View Calendar</MenuItem>*/}
+//{skillMatrixMenuItem }
+//{engineerReportMenuItem }
+            actionsPopover = (
+                <Popover title="User Actions">
+                    <ul className="user-actions">
+                        <li><a onClick={this.sendEmail} href={location.hash} key="email">Send E-Mail</a></li>
+                        <li><a onClick={this.salesForce} href={location.hash} key="salesforce">Open in Salesforce</a></li>
                         {skillMatrixMenuItem }
                         {engineerReportMenuItem }
-                    </SplitButton>
-                </OverlayTrigger>
+                    </ul>
+                </Popover>
+            );
+            return (
+                <span ref="user">
+                    <OverlayTrigger trigger='click' placement='right' overlay={actionsPopover}>
+                        <Glyph glyph="cog" style={{cursor: "pointer"}}></Glyph>
+                    </OverlayTrigger>
+                    &nbsp;
+                    <OverlayTrigger trigger='hover' placement='right' overlay={popover}>
+                    {title}
+                    </OverlayTrigger>
+                </span>
             );
         }
     }

@@ -90,8 +90,12 @@ var udsUser = {
     "externalModelId": "01234567ABC"
 };
 
+var openUser = function(user) {
+    alert("You clicked on " + user.resource.fullName + "!");
+};
+
 var userInstance = (
-    <User resource={udsUser}></User>
+    <User resource={udsUser} openUser={openUser}></User>
 );
 
 React.render(userInstance, mountNode);

@@ -64,7 +64,7 @@
     "moment": "~2.8.4",
     "q": "~1.0.1",
     "react": "~0.12.2",
-    "react-bootstrap": "~0.13.0",
+    "react-bootstrap": "~0.13.*",
     "react-ladda": "~2.0.0",
     "string": "~3.0.0"
   }
