@@ -142,7 +142,7 @@ module.exports = React.createClass({
             }
             //title = <span><b>{`${user.superRegion}: ${user.fullName}`}</b></span>;
             title = (
-                <span onClick={this.openUser}>
+                <span onClick={this.openUser} className="user-text-container pointer">
                     {user.superRegion != null ? <b>{user.superRegion},&nbsp;</b>: null}
                     <span>{user.fullName}</span>
                     {user.isManager ? <b>&nbsp;(M)</b> : null}
