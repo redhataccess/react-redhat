@@ -152,9 +152,18 @@ var ComponentsPage = React.createClass({
                   <p>Displays the case associates</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/CaseAssociates.js', 'utf8')} />
 
-                  <h3 id="case">Case</h3>
+                  <h3 id="caseSbrs">Case Sbrs</h3>
+                  <p>Displays the case sbrs</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/CaseSbrs.js', 'utf8')} />
+
+                  <h3 id="caseTags">Case Tags</h3>
+                  <p>Displays the case tags</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/CaseTags.js', 'utf8')} />
+                    
+                  <h3 id="case">Cases </h3>
                   <p>Displays the cases</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/Case.js', 'utf8')} />
+
                 </div>
 
               </div>

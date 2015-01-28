@@ -1,5 +1,6 @@
 var React       = require('react');
-var _           = require('lodash');
+var map         = require('lodash/collection/map');
+var filter      = require('lodash/collection/filter');
 var Timestamp   = require('../comment/Timestamp');
 
 var Accordion   = require('react-bootstrap/Accordion');
@@ -9,10 +10,10 @@ var Table       = require('react-bootstrap/Table');
 Component = React.createClass({
     render: function() {
         var linkedResources, resourcesUI, tableBody;
-        linkedResources = _.filter(this.props.resourceLinks, (link) => link.resource.resourceStatus === 'Linked');
+        linkedResources = filter(this.props.resourceLinks, (link) => link.resource.resourceStatus === 'Linked');
         resourcesUI = <span>No external resources attached.</span>;
         if (linkedResources.length > 0) {
-            tableBody = _.map(linkedResources, (link) => {
+            tableBody = map(linkedResources, (link) => {
                 var resourceNumber = null;
                 if (link.resource.resourceType === 'KnowledgeBaseSolution') {
                     resourceNumber = <a target='_blank' href={`https://access.redhat.com/solutions/${link.resource.resourceId}`}>{link.resource.resourceId}</a>;
@@ -51,7 +52,7 @@ Component = React.createClass({
                 <Panel
                     eventKey='caseDescription'
                     key='caseDescription'
-                    header='Linked Resources (KnowledgeBase, Documentation, Support Cases, ...)#TypeTitleStatus'
+                    header='Linked Resources (KnowledgeBase, Documentation, Support Cases, ...)'
                     collapsable={true}
                     defaultExpanded={false}>{resourcesUI}</Panel>
             </Accordion>

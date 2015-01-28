@@ -1,6 +1,6 @@
 var caseInstance= {
     "resource": {
-        "caseNumber": "01339953",
+        "caseNumber": 1090296,
         "status": "Waiting on Red Hat",
         "internalStatus": "Waiting on QA",
         "severity": "2 (High)",
@@ -416,8 +416,8 @@ var caseInstance= {
 
 var instance = (
     <div>
-        <Case key='taskCase' case={caseInstance}></Case>
-        
+        <CaseTags case={caseInstance} key='tags'></CaseTags>
+
     </div>
 );
 

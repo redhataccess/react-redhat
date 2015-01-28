@@ -2,18 +2,14 @@
 
 var React           = require('react');
 var ReactTestUtils  = require('react/lib/ReactTestUtils');
-var Case             = require('../../cjs/case/Case');
+var CaseSbrs             = require('../../cjs/case/CaseSbrs');
 
-describe('Case', function () {
+describe('CaseSbrs', function () {
 
-    afterEach(function() {
-        $.ajax.restore();
-    });
-
-    it('Should display cases ', function (done) {
+    it('Should display case sbrs ', function () {
         var caseInstance= {
             "resource": {
-                "caseNumber": "01339953",
+                "caseNumber": 1093243,
                 "status": "Waiting on Red Hat",
                 "internalStatus": "Waiting on QA",
                 "severity": "2 (High)",
@@ -422,16 +418,14 @@ describe('Case', function () {
             "resourceReliability": "Fresh",
             "externalModelId": "500A000J6beAIAR"
         };
-        var callBack=sinon.stub($, 'ajax');
-
 
 
 
         var instance = ReactTestUtils.renderIntoDocument(
-            <Case key='taskCase' case={caseInstance}></Case>
+            <CaseSbrs case={caseInstance} key='sbrs'></CaseSbrs>
         );
 
-        done();
+
     
     });
 });

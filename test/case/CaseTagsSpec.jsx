@@ -2,18 +2,14 @@
 
 var React           = require('react');
 var ReactTestUtils  = require('react/lib/ReactTestUtils');
-var Case             = require('../../cjs/case/Case');
+var CaseTags             = require('../../cjs/case/CaseTags');
 
-describe('Case', function () {
+describe('CaseTags', function () {
 
-    afterEach(function() {
-        $.ajax.restore();
-    });
-
-    it('Should display cases ', function (done) {
+    it('Should display case tags ', function () {
         var caseInstance= {
             "resource": {
-                "caseNumber": "01339953",
+                "caseNumber": 1093243,
                 "status": "Waiting on Red Hat",
                 "internalStatus": "Waiting on QA",
                 "severity": "2 (High)",
@@ -64,6 +60,9 @@ describe('Case', function () {
                 "isTAMCase": false,
                 "isFTSCase": false,
                 "isCustomerEscalation": false,
+                "tags": [
+                    "memory"
+                ],
                 "owner": {
                     "resource": {
                         "fullName": "User, Test",
@@ -422,16 +421,14 @@ describe('Case', function () {
             "resourceReliability": "Fresh",
             "externalModelId": "500A000J6beAIAR"
         };
-        var callBack=sinon.stub($, 'ajax');
-
 
 
 
         var instance = ReactTestUtils.renderIntoDocument(
-            <Case key='taskCase' case={caseInstance}></Case>
+            <CaseTags case={caseInstance} key='tags'></CaseTags>
         );
 
-        done();
+
     
     });
 });

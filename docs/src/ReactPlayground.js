@@ -25,6 +25,8 @@ var CaseIssueLinks  = require('../../cjs/case/CaseIssueLinks');
 var CaseProduct  = require('../../cjs/case/CaseProduct');
 var CaseHeader  = require('../../cjs/case/CaseHeader');
 var CaseAssociates  = require('../../cjs/case/CaseAssociates');
+var CaseSbrs = require('../../cjs/case/CaseSbrs');
+var CaseTags = require('../../cjs/case/CaseTags');
 var Case = require('../../cjs/case/Case');
 
 
