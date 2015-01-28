@@ -57,6 +57,7 @@ module.exports = React.createClass({
             <span key='role-description'>
                 <Label key='role-description' bsStyle={roleStyle}>
                 {this.genParentUserIcon(isParent)}
+                &nbsp;
                 {this.genParentUser(isParent, userId, role)}
                 </Label>
             </span>
