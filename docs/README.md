@@ -24,7 +24,7 @@ The site uses React Red Hat components, so first make sure you've installed and 
 
 ```sh
 $ cd react-redhat/docs
-$ npm start
+$ npm run start
 $ open http://localhost:4000/
 ```
 

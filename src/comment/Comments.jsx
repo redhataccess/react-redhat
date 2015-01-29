@@ -1,4 +1,5 @@
 var React           = require('react/addons');
+var moment          = require('moment');
 var cx              = React.addons.classSet;
 var _               = require('lodash');
 var moment          = require('moment');
@@ -17,11 +18,15 @@ var Component = React.createClass({
         };
     },
     genCommentElements: function() {
-        // If the limit is defined (mainly for testing and docs) take the first 0...limit comments for display
-        if (_.isNumber(this.props.limit)) {
-            return _.map(_.values(this.state.comments).slice(0, this.props.limit), (c) => <Comment id={c['externalModelId']} key={c['externalModelId']} comment={c}></Comment>);
+        var comments = [];
+        if (this.state.comments && _.keys(this.state.comments).length > 0) {
+            if (_.isNumber(this.props.limit)) {
+                comments = this.state.comments.slice(0, this.props.limit);
+            }
+            comments = this.state.comments;
+            return _.map(comments, (c) => <Comment id={c['externalModelId']} key={c['externalModelId']} comment={c}></Comment>);
         }
-        return _.map(this.state.comments, (c) => <Comment id={c['externalModelId']} key={c['externalModelId']} comment={c}></Comment>);
+        return null;
     },
     queryComments: function(props) {
         var self = this;
@@ -31,8 +36,10 @@ var Component = React.createClass({
         };
         this.getComments(opts)
             .then((comments) => {
+                comments.sort((a, b) => +moment(b.resource.lastModified) - +moment(a.resource.lastModified));
                 self.setState({
-                    'comments': _.zipObject(_.map(comments, (c) => [c['externalModelId'], c] )),
+                    // 'comments': _.zipObject(_.map(comments, (c) => [c['externalModelId'], c] )),
+                    'comments': comments,
                     'loading': false
                 })
             })
@@ -51,10 +58,10 @@ var Component = React.createClass({
         if (this.state.comments == null) {
             return <Alert bsStyle='warning' key='alert'>No case comments found for this case</Alert>
         }
-        var negativeSla = _.filter(_.values(this.state.comments), (comment) => {
+        var negativeSla = _.filter(this.state.comments, (comment) => {
             return comment.resource["public"] && (comment.resource.sbt != null) && comment.resource.sbt < 0;
         }).length;
-        var allSla = _.filter(_.values(this.state.comments), function(comment) {
+        var allSla = _.filter(this.state.comments, function(comment) {
             return (comment.resource.sbt != null) && comment.resource["public"];
         }).length;
 

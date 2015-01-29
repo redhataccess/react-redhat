@@ -12,3 +12,6 @@ cjs/*
 amd/*
 ie8/bundle.js
 *.iml
+
+react-redhat.sublime-project
+react-redhat.sublime-workspace
