@@ -40,7 +40,8 @@ module.exports = React.createClass({
       tags: [],
       uql: null,
       users: null,
-      isQuerying: false
+      isQuerying: false,
+      displayLimit: 20
     };
   },
   componentDidMount: function() {
@@ -229,7 +230,7 @@ module.exports = React.createClass({
     e.stopPropagation();
     e.preventDefault();
     this.setState({isQuerying: true});
-    this.queryUsers({query: this.createQuery()}).done(function(users){
+    this.queryUsers({query: this.createQuery(), limit: this.state.displayLimit}).done(function(users){
       self.setState({users: users, isQuerying: false});
     }, function(err){
       console.error(err.stack);
@@ -243,19 +244,37 @@ module.exports = React.createClass({
       return <UserSearchResult {...this.props} users={this.state.users}></UserSearchResult>
     }
   },
+  changeDisplayLimit: function(){
+    return (function(event) {
+      var val = event.target.value;
+      this.setState({displayLimit: val});
+    }).bind(this);
+  },
   render: function() {
     var header = (
-        <span>
-          <Button
-              bsStyle="primary"
-              style={{color: '#fff'}}
-              className="pull-right"
-              onClick={this.submitForm.bind(this)}
-              disabled={this.createQuery().length == 0}>
-            <Glyph glyph="search">&nbsp;Search</Glyph>
-          </Button>
-          <h4>Search Users</h4>
-        </span>
+        <Grid>
+          <Row>
+            <h4 style={{display: "inline"}}>Search Users</h4>
+            <span className="pull-right" >
+              <Button
+                  bsStyle="primary"
+                  style={{color: '#fff'}}
+                  onClick={this.submitForm.bind(this)}
+                  disabled={this.createQuery().length == 0}>
+                <Glyph glyph="search">&nbsp;Search</Glyph>`
+              </Button>
+            &nbsp;
+              Show &nbsp;
+              <select value={this.state.displayLimit} onChange={this.changeDisplayLimit()} disabled={this.createQuery().length == 0}>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+            &nbsp;Records
+            </span>
+          </Row>
+        </Grid>
     );
     {/*this.genSkillRows()*/}
     return (
