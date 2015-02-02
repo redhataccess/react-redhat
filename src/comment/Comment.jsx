@@ -3,6 +3,9 @@ var cx          = React.addons.classSet;
 
 var Timestamp   = require('./Timestamp');
 var User        = require('../user/User');
+var Badge       = require('react-bootstrap/Badge');
+var CommentType = require('./CommentType');
+var SBT         = require('./SBT');
 
 var Component = React.createClass({
     displayName: 'Comment',
@@ -34,9 +37,19 @@ var Component = React.createClass({
         return cx(classSet);
     },
     render: function() {
-        var comment, commentResource, header, timestamp;
+        var comment, commentResource, header, timestamp,badge,commentType,sbt;
         commentResource = this.props.comment;
         comment = commentResource.resource || null;
+        badge=<Badge>{this.props.comment.resource.commentNumber}</Badge>;
+        commentType=<CommentType></CommentType>;
+        if(this.props.comment.resource.sbt) {
+            sbt = <SBT sbt={this.props.comment.resource.sbt}></SBT>
+        }
+        else
+        {
+            sbt=null;
+            
+        }
         if (comment.created === comment.lastModified) {
             timestamp = <Timestamp text='created' timestamp={comment.created}></Timestamp>;
         } else {
@@ -54,7 +67,15 @@ var Component = React.createClass({
                     <User resource={comment.createdBy}></User>
                 </div>
                 <div className='pull-right'>
+                    <span>
+                        &nbsp;
                 {timestamp}
+                        
+                        </span>
+                <span>
+                    &nbsp;
+                {sbt}
+                </span>
                 </div>
             </span>
         );

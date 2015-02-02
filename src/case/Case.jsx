@@ -12,7 +12,6 @@ var CaseIssueLinks      = require('./CaseIssueLinks');
 var CaseResourceLinks   = require('./CaseResourceLinks');
 var Comments            = require('../comment/Comments');
 
-
 var Alert               = require('react-bootstrap/Alert');
 var Grid                = require('react-bootstrap/Grid');
 
@@ -47,7 +46,7 @@ var Component = React.createClass({
                     <CaseResourceLinks resourceLinks={this.props.case.resource.resourceLinks}></CaseResourceLinks>
                 </div>
                 <hr />
-                <Comments caseNumber={this.props.case.resource.caseNumber}></Comments>
+                <Comments case={this.props.case} caseNumber={this.props.case.resource.caseNumber}></Comments>
             </div>
         )
     }
