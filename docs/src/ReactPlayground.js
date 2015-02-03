@@ -30,6 +30,7 @@ var CaseTags = require('../../cjs/case/CaseTags');
 var Case = require('../../cjs/case/Case');
 
 
+
 var IS_MOBILE = typeof navigator !== 'undefined' && (
   navigator.userAgent.match(/Android/i)
     || navigator.userAgent.match(/webOS/i)

@@ -123,46 +123,8 @@ var ComponentsPage = React.createClass({
                   <p>Displays all the comments</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/comment/Comments.js', 'utf8')} />
 
-                  <h3 id="caseSummary">Case Summary</h3>
-                  <p>Displays the case summary</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/CaseSummary.js', 'utf8')} />
-
-                  <h3 id="caseDescription">Case Description</h3>
-                  <p>Displays the case description</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/CaseDescription.js', 'utf8')} />
-
-                  <h3 id="caseResourceLinks">Case Resource Links</h3>
-                  <p>Displays the case resource links</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/CaseResourceLinks.js', 'utf8')} />
-
-                  <h3 id="caseIssueLinks">Case Issue Links</h3>
-                  <p>Displays the case issue links</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/CaseIssueLinks.js', 'utf8')} />
-
-                  <h3 id="caseProduct">Case Product</h3>
-                  <p>Displays the case products</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/CaseProduct.js', 'utf8')} />
 
 
-                  <h3 id="caseHeader">Case Header</h3>
-                  <p>Displays the case headers</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/CaseHeader.js', 'utf8')} />
-
-                  <h3 id="caseAssociates">Case Associates</h3>
-                  <p>Displays the case associates</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/CaseAssociates.js', 'utf8')} />
-
-                  <h3 id="caseSbrs">Case Sbrs</h3>
-                  <p>Displays the case sbrs</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/CaseSbrs.js', 'utf8')} />
-
-                  <h3 id="caseTags">Case Tags</h3>
-                  <p>Displays the case tags</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/CaseTags.js', 'utf8')} />
-                    
-                  <h3 id="case">Cases </h3>
-                  <p>Displays the cases</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/Case.js', 'utf8')} />
 
                 </div>
 
