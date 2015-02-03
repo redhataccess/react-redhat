@@ -4,7 +4,6 @@ var cx              = React.addons.classSet;
 var _               = require('lodash');
 var moment          = require('moment');
 var Comment         = require('./Comment');
-//var Input                 = require('react-bootstrap/Input');
 var SlaAttainment   = require('./SlaAttainment');
 var UdsMixin        = require('../utils/UdsMixin');
 
@@ -66,11 +65,6 @@ var Component = React.createClass({
             else {
                 newDisplayedResources = this.state.displayedResources.concat(name);
             }
-            if(e.target.checked)
-            {
-                
-                
-            }
             this.setState({'displayedResources':newDisplayedResources});
 
             
@@ -99,19 +93,14 @@ var Component = React.createClass({
                 var i=1;
                  comments.sort((a, b) => +moment(b.resource.lastModified) - +moment(a.resource.lastModified));
 
-
-                var sorted_comments = _.map(_.sortBy((comments), function(resource) {
-                    return parseInt(moment(resource.resource.lastModified).format('X'));
-                }), function(comment) {
+                var sorted_comments = _.map(comments, function(comment){
                     comment.resource.commentNumber = i;
                     i += 1;
                     return comment;
                 });
-                                   
 
                 
                 self.setState({
-                    // 'comments': _.zipObject(_.map(comments, (c) => [c['externalModelId'], c] )),
                     'comments': sorted_comments,
                     'loading': false
                 })
@@ -175,7 +164,7 @@ var Component = React.createClass({
         checkboxMapping.push({name:'caseReviews',value:this.props.case.resource.caseReviews?this.props.case.resource.caseReviews.length:0,display:' Case Reviews '});
         checkboxMapping.push({name:'remoteSessions',value:this.props.case.resource.remoteSessions?this.props.case.resource.remoteSessions.length:0,display:' Remote Sessions '});
         checkboxMapping.push({name:'liveChatTranscripts',value:this.props.case.resource.liveChatTranscripts?this.props.case.resource.liveChatTranscripts.length:0,display:' Live Chat Transcript(s) '});
-
+        comment_components.sort((a, b) => +moment(b.resource.lastModified) - +moment(a.resource.lastModified));
         return (
             <div>
                 <SlaAttainment negative={negativeSla} all={allSla}></SlaAttainment>

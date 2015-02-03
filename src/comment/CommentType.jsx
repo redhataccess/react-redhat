@@ -1,25 +1,38 @@
 var React       = require('react');
 
-var Accordion   = require('react-bootstrap/Accordion');
-var Panel       = require('react-bootstrap/Panel');
+var Label = require('react-bootstrap/Label');
+var moment = require('moment')
+
 
 var Component = React.createClass({
-    render: function() {
-        var summary = <span>No internal summary available.</span>;
-        if (this.props.summary != null) {
-            summary = <pre className='case description paneled'>{this.props.summary}</pre>;
+    displayStyle: function() {
+        if(this.props.resource) {
+            if (this.props.resource.questionSets) {
+                return ['info', 'Content Review'];
+            } else if (this.props.resource.public) {
+                return ['success', 'Public Comment'];
+            } else if (!this.props.resource.public) {
+                return ['danger', 'Private Comment'];
+            } else if (this.props.resource.subject && this.props.resource.body) {
+                return ['warning', 'Account Note'];
+            } else {
+                return ['default', 'Unknown Update'];
+            }
         }
-        return (
-            <Accordion>
-                <Panel
-                    key='caseSummary'
-                    header='Internal Summary'
-                    collapsable={true}
-                    defaultExpanded={false}>
-                {summary}
-                </Panel>
-            </Accordion>
-        )
+        
+    },
+    render: function() {
+            if(this.props.resource) {
+                var [style,text] = this.displayStyle();
+                return (
+                    <Label bsStyle={style}>
+                {text}
+                    </Label>
+                )
+            }else{
+                return null;
+            }
+
     }
 });
 

@@ -48,8 +48,8 @@ var ComponentsPage = React.createClass({
           <NavMain activePage="components" ref="topNav" />
 
           <PageHeader
-            title="Components"
-            subTitle="" />
+              title="Components"
+              subTitle="" />
 
           <div className="container bs-docs-container">
             <div className="row">
@@ -64,8 +64,8 @@ var ComponentsPage = React.createClass({
                   <div className="bs-callout bs-callout-warning">
                     <h4>UDS response</h4>
                     <p>Make sure that you pass the raw UDS object to <code>User</code>.  The actual user object
-                    is contained withing the <code>response.resource</code> but there is other metadata required on
-                    the main response object such as the <code>externalModelId</code>.
+                      is contained withing the <code>response.resource</code> but there is other metadata required on
+                      the main response object such as the <code>externalModelId</code>.
                     </p>
                   </div>
 
@@ -89,9 +89,9 @@ var ComponentsPage = React.createClass({
                   <div className="bs-callout bs-callout-info">
                     <h4>End user application</h4>
                     <p>In your end user application you will need to <code>npm install select2 --save</code>
-                    and <code>npm install typeahead.js --save</code>.   After you do this you can then require in the
-                    code in your react component like so: <code>require('select2');</code> and <code>require('typeahead.js')</code>.
-                    Remember to require in the css as well into your index or entry point for those two libraries.
+                      and <code>npm install typeahead.js --save</code>.   After you do this you can then require in the
+                      code in your react component like so: <code>require('select2');</code> and <code>require('typeahead.js')</code>.
+                      Remember to require in the css as well into your index or entry point for those two libraries.
                     </p>
                   </div>
                   <p>Search for current users</p>
@@ -159,7 +159,7 @@ var ComponentsPage = React.createClass({
                   <h3 id="caseTags">Case Tags</h3>
                   <p>Displays the case tags</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/CaseTags.js', 'utf8')} />
-                    
+
                   <h3 id="case">Cases </h3>
                   <p>Displays the cases</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/case/Case.js', 'utf8')} />
@@ -170,15 +170,15 @@ var ComponentsPage = React.createClass({
 
               <div className="col-md-3">
                 <Affix
-                  className="bs-docs-sidebar hidden-print"
-                  role="complementary"
-                  offsetTop={this.state.navOffsetTop}
-                  offsetBottom={this.state.navOffsetBottom}>
+                    className="bs-docs-sidebar hidden-print"
+                    role="complementary"
+                    offsetTop={this.state.navOffsetTop}
+                    offsetBottom={this.state.navOffsetBottom}>
                   <Nav
-                    className="bs-docs-sidenav"
-                    activeHref={this.state.activeNavItemHref}
-                    onSelect={this.handleNavItemSelect}
-                    ref="sideNav">
+                      className="bs-docs-sidenav"
+                      activeHref={this.state.activeNavItemHref}
+                      onSelect={this.handleNavItemSelect}
+                      ref="sideNav">
                     <SubNav href="#users" key="users" text="Users">
                       <NavItem href="#geo" key="geo">Geo</NavItem>
                       <NavItem href="#timezone" key="timezone">Timezone</NavItem>
@@ -196,7 +196,7 @@ var ComponentsPage = React.createClass({
                     {/*<NavItem href="#panels" key={5}>Panels</NavItem>*/}
                   </Nav>
                   <a className="back-to-top" href="#top">
-                  Back to top
+                    Back to top
                   </a>
                 </Affix>
               </div>
@@ -205,7 +205,7 @@ var ComponentsPage = React.createClass({
 
           <PageFooter ref="footer" />
         </div>
-      );
+    );
   }
 });
 

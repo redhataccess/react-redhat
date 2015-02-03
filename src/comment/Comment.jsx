@@ -1,6 +1,5 @@
 var React       = require('react/addons');
 var cx          = React.addons.classSet;
-
 var Timestamp   = require('./Timestamp');
 var User        = require('../user/User');
 var Badge       = require('react-bootstrap/Badge');
@@ -39,9 +38,14 @@ var Component = React.createClass({
     render: function() {
         var comment, commentResource, header, timestamp,badge,commentType,sbt;
         commentResource = this.props.comment;
+        var commentNumber="";
+       if(this.props.comment.resource.commentNumber)
+       {
+           commentNumber=this.props.comment.resource.commentNumber;
+           
+       }
         comment = commentResource.resource || null;
-        badge=<Badge>{this.props.comment.resource.commentNumber}</Badge>;
-        commentType=<CommentType></CommentType>;
+        commentType=<CommentType resource={this.props.comment.resource}></CommentType>;
         if(this.props.comment.resource.sbt) {
             sbt = <SBT sbt={this.props.comment.resource.sbt}></SBT>
         }
@@ -62,22 +66,31 @@ var Component = React.createClass({
             )
         }
         header = (
-            <span>
+            <div>
                 <div className='pull-left'>
                     <User resource={comment.createdBy}></User>
                 </div>
                 <div className='pull-right'>
                     <span>
                         &nbsp;
-                {timestamp}
-                        
-                        </span>
-                <span>
+                        {timestamp}
+                     </span>
+                    <span>
+                        &nbsp;
+                        {sbt}
+                    </span>
+                    <span>
+                         &nbsp;
+                        {commentType}
+                    </span>
+                   
+                    <span>
                     &nbsp;
-                {sbt}
-                </span>
+                        <Badge>{commentNumber.toString()}</Badge>
+                    </span>
+                   
                 </div>
-            </span>
+            </div>
         );
         return (
             <div className='panel panel-default'>
