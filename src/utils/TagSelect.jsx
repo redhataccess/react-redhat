@@ -4,7 +4,7 @@ var _         = require('lodash');
 var Input     = require('react-bootstrap/Input');
 
 var UdsMixin  = require('../utils/UdsMixin');
-var RandomUtilsMixin  = require('../utils/randomUtilsMixin');
+var RandomUtilsMixin  = require('../utils/RandomUtilsMixin');
 
 module.exports = React.createClass({
   mixins: [UdsMixin, RandomUtilsMixin],
