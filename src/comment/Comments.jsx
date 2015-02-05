@@ -90,12 +90,12 @@ var Component = React.createClass({
         };
         this.getComments(opts)
             .then((comments) => {
-                var i=1;
+                var i=comments.length;
                  comments.sort((a, b) => +moment(b.resource.lastModified) - +moment(a.resource.lastModified));
 
                 var sorted_comments = _.map(comments, function(comment){
                     comment.resource.commentNumber = i;
-                    i += 1;
+                    i -= 1;
                     return comment;
                 });
 
