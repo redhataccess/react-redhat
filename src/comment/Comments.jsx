@@ -11,17 +11,15 @@ var Alert           = require('react-bootstrap/Alert').State;
 var State           = require('react-router/dist/react-router').State;
 var CommentActions  = require('../flux/actions/CommentActions');
 var CommentStore    = require('../flux/stores/CommentStore');
-var Marty                   = require('marty');
-var AppConstants			= require('../flux/constants/AppConstants');
+var Marty           = require('marty');
+var AppConstants	= require('../flux/constants/AppConstants');
 
 var CommentStateMixin = Marty.createStateMixin({
     mixins: [State],
     listenTo: CommentStore,
     getState: function () {
-
         return {
             comments: CommentStore.getComments(this.props.caseNumber)
-
         }
     }
 });
@@ -38,8 +36,6 @@ var Component = React.createClass({
         displayedResourcesLocal.push('caseReviews');
         displayedResourcesLocal.push('remoteSessions');
         displayedResourcesLocal.push('liveChatTranscripts');
-
-
         return {
             displayedResources:displayedResourcesLocal
         };
@@ -53,7 +49,6 @@ var Component = React.createClass({
         else
         {
             return false;
-
         }
     },
 
@@ -76,14 +71,11 @@ var Component = React.createClass({
                         newDisplayedResources=newDisplayedResources.concat(this.state.displayedResources[i]);
                     }
                 }
-
             }
             else {
                 newDisplayedResources = this.state.displayedResources.concat(name);
             }
             this.setState({'displayedResources':newDisplayedResources});
-
-
         }.bind(this);
     } ,
 
