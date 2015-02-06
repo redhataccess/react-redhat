@@ -88,9 +88,9 @@ var ComponentsPage = React.createClass({
                   <h3 id="userSearch">User Search</h3>
                   <div className="bs-callout bs-callout-info">
                     <h4>End user application</h4>
-                    <p>In your end user application you will need to <code>npm install select2 --save</code>
+                    <p>In your end user application you will need to <code>npm install chosen --save</code>
                       and <code>npm install typeahead.js --save</code>.   After you do this you can then require in the
-                      code in your react component like so: <code>require('select2');</code> and <code>require('typeahead.js')</code>.
+                      code in your react component like so: <code>require('chosen');</code> and <code>require('typeahead.js')</code>.
                       Remember to require in the css as well into your index or entry point for those two libraries.
                     </p>
                   </div>
