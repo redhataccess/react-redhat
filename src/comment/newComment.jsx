@@ -2,7 +2,7 @@ var React                 = require('react');
 var cx                    = React.addons.classSet;
 var _                     = require('lodash');
 var strata                = require('stratajs');
-var Spacer                = require('react-redhat/Spacer');
+var Spacer                = require('../Spacer');
 
 // React Bootstrap imports
 var Label                 = require('react-bootstrap/Label');

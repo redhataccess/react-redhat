@@ -1,6 +1,6 @@
 var caseInstance= {
     "resource": {
-        "caseNumber": "01339953",
+        "caseNumber": 1090296,
         "status": "Waiting on Red Hat",
         "internalStatus": "Waiting on QA",
         "severity": "2 (High)",
@@ -51,9 +51,6 @@ var caseInstance= {
         "isTAMCase": false,
         "isFTSCase": false,
         "isCustomerEscalation": false,
-        "tags": [
-            "memory"
-        ],
         "owner": {
             "resource": {
                 "fullName": "User, Test",
@@ -413,9 +410,10 @@ var caseInstance= {
     "externalModelId": "500A000J6beAIAR"
 };
 
+
 var instance = (
     <div>
-        <CaseHeader case={caseInstance} key='caseHeader'></CaseHeader>
+        <CaseStatus case={caseInstance} key='status'></CaseStatus>
         
     </div>
 );
