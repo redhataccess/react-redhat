@@ -17,6 +17,7 @@ var Timestamp      = require('../../cjs/comment/Timestamp');
 var SlaAttainment  = require('../../cjs/comment/SlaAttainment');
 var CommentType  = require('../../cjs/comment/CommentType');
 var Comment  = require('../../cjs/comment/Comment');
+var SBT  = require('../../cjs/comment/SBT');
 var Comments  = require('../../cjs/comment/Comments');
 var CaseSummary  = require('../../cjs/case/CaseSummary');
 var CaseDescription  = require('../../cjs/case/CaseDescription');
@@ -25,9 +26,12 @@ var CaseIssueLinks  = require('../../cjs/case/CaseIssueLinks');
 var CaseProduct  = require('../../cjs/case/CaseProduct');
 var CaseHeader  = require('../../cjs/case/CaseHeader');
 var CaseAssociates  = require('../../cjs/case/CaseAssociates');
+var CaseStatus = require('../../cjs/case/CaseStatus');
+var CaseSeverity = require('../../cjs/case/CaseSeverity');
 var CaseSbrs = require('../../cjs/case/CaseSbrs');
 var CaseTags = require('../../cjs/case/CaseTags');
-var Case = require('../../cjs/case/Case');
+
+
 
 
 
