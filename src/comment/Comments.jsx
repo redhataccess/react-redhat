@@ -135,20 +135,20 @@ var Component = React.createClass({
                     comment_components = comment_components.concat(privateComments)
                 if(_.contains(self.state.displayedResources, 'publicCommentsPosSbt'))
                     comment_components = comment_components.concat(posSbtPublicComments)
-                if(_.contains(self.state.displayedResources, 'caseReviews') && (self.props.case.resource.caseReviews))
-                    comment_components = comment_components.concat(self.props.case.resource.caseReviews)
-                if(_.contains(self.state.displayedResources, 'remoteSessions') && (self.props.case.resource.remoteSessions))
-                    comment_components = comment_components.concat(self.props.case.resource.remoteSessions)
-                if(_.contains(self.state.displayedResources, 'liveChatTranscripts') && (self.props.case.resource.liveChatTranscripts))
-                    comment_components = comment_components.concat(self.props.case.resource.liveChatTranscripts)
+                if(_.contains(self.state.displayedResources, 'caseReviews') && (self.props.caseReviews))
+                    comment_components = comment_components.concat(self.props.caseReviews)
+                if(_.contains(self.state.displayedResources, 'remoteSessions') && (self.props.remoteSessions))
+                    comment_components = comment_components.concat(self.props.remoteSessions)
+                if(_.contains(self.state.displayedResources, 'liveChatTranscripts') && (self.props.liveChatTranscripts))
+                    comment_components = comment_components.concat(self.props.liveChatTranscripts)
 
                 var checkboxMapping = [];
                 checkboxMapping.push({name:'privateComments',value:privateComments?privateComments.length:0,display:' Private Comments '});
                 checkboxMapping.push({name:'publicCommentsPosSbt',value:posSbtPublicComments?posSbtPublicComments.length:0,display:' +SBT Public Comments '});
                 checkboxMapping.push({name:'publicCommentsNegSbt',value:negSbtPublicComments?negSbtPublicComments.length:0,display:' -SBT Public Comments '});
-                checkboxMapping.push({name:'caseReviews',value:self.props.case.resource.caseReviews?self.props.case.resource.caseReviews.length:0,display:' Case Reviews '});
-                checkboxMapping.push({name:'remoteSessions',value:self.props.case.resource.remoteSessions?self.props.case.resource.remoteSessions.length:0,display:' Remote Sessions '});
-                checkboxMapping.push({name:'liveChatTranscripts',value:self.props.case.resource.liveChatTranscripts?self.props.case.resource.liveChatTranscripts.length:0,display:' Live Chat Transcript(s) '});
+                checkboxMapping.push({name:'caseReviews',value:self.props.caseReviews?self.props.caseReviews.length:0,display:' Case Reviews '});
+                checkboxMapping.push({name:'remoteSessions',value:self.props.remoteSessions?self.props.remoteSessions.length:0,display:' Remote Sessions '});
+                checkboxMapping.push({name:'liveChatTranscripts',value:self.props.liveChatTranscripts?self.props.liveChatTranscripts.length:0,display:' Live Chat Transcript(s) '});
                 comment_components.sort(function(a, b){
                     return +moment(b.resource.lastModified) - +moment(a.resource.lastModified);
                 });

@@ -94,7 +94,11 @@ var Component = React.createClass({
                                 authenticatedUser={self.props.authenticatedUser}></NewComment>
                         </div>
                         <hr />
-                        <Comments caseNumber={caseNumber}></Comments>
+                        <Comments 
+                            caseNumber={caseNumber} 
+                            caseReviews={c.resource.caseReviews} 
+                            remoteSessions={c.resource.remoteSessions} 
+                            liveChatTranscripts={c.resource.liveChatTranscripts}></Comments>
                     </div>
                 );
             }
