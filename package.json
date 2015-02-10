@@ -63,7 +63,7 @@
     "lodash": "~3.0.0",
     "jsuri": "~1.3.x",
     "marty": "*",
-    "reactify":"*",
+    "reactify": "*",
     "react-router": "~0.11.6",
     "moment": "~2.8.4",
     "q": "~1.0.1",
@@ -71,6 +71,7 @@
     "react-bootstrap": "~0.13.*",
     "react-ladda": "~2.0.0",
     "stratajs": "~1.1.19",
-    "string": "~3.0.0"
+    "string": "~3.0.0",
+    "autolinker": "~0.15.2"
   }
 }
