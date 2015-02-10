@@ -67,7 +67,7 @@ var Component = React.createClass({
             )
         }
         
-        var commentText= Autolinker.link(comment.text);
+        var commentText = (comment && comment.text && Autolinker.link(comment.text)) || "";
         
         header = (
             <div>
