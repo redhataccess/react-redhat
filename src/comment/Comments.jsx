@@ -6,7 +6,7 @@ var moment          = require('moment');
 var Comment         = require('./Comment');
 var SlaAttainment   = require('./SlaAttainment');
 
-var Alert           = require('react-bootstrap/Alert').State;
+var Alert           = require('react-bootstrap/Alert');
 
 var State           = require('react-router/dist/react-router').State;
 var CommentActions  = require('../flux/actions/CommentActions');
