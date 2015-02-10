@@ -115,10 +115,6 @@ var Component = React.createClass({
                 var privateComments = _.filter(_.values(comments), (comment) => {
                     return !comment.resource["public"];
                 });
-                if(!privateComments || privateComments.length==0)
-                {
-                    privateComments=0;
-                }
 
                 var posSbtPublicComments = _.filter(_.values(comments), (comment) => {
                     return comment.resource["public"] && ((comment.resource.sbt >0) || comment.resource.sbt ===undefined);
