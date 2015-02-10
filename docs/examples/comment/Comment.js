@@ -1,7 +1,7 @@
 var commentResource=[
 {
     "resource": {
-    "text": "It seems working ok on limited testing",
+    "text": "It seems working ok on limited testing also try http://access.redhat.com this will make sure the testing is proper",
         "createdBy": {
         "resource": {
             "fullName": "User, Test"
@@ -21,7 +21,10 @@ var commentResource=[
   },
     "resourceReliability": "Fresh",
     "externalModelId": "a0aA000000CZco6IAD"
-}];
+}
+
+
+];
 var comment=[];
 comment.resource=commentResource[0].resource;
 var instance = (

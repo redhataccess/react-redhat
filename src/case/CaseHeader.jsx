@@ -7,7 +7,7 @@ var CaseSbrs    = require('./CaseSbrs');
 var CaseTags    = require('./CaseTags');
 
 var Spacer      = require('../Spacer');
-//var ResourceOpEnum    = require('../enums/ResourceOpEnum.coffee');
+var ResourceOpEnum    = require('../enums/ResourceOpEnum.js');
 
 var Well            = require('react-bootstrap/Well');
 var Grid            = require('react-bootstrap/Grid');
@@ -24,9 +24,8 @@ var Component = React.createClass({
     genEntityOpText: function (c) {
         var resourceOp, resourceOpText;
         if (c != null) {
-          //  resourceOp = ResourceOpEnum.getOpFromCase(c);
-          //  resourceOpText = resourceOp.display + (resourceOp.grammar != null ? " " + resourceOp.grammar : "")
-            resourceOpText='';
+            resourceOp = ResourceOpEnum.getOpFromCase(c);
+            resourceOpText = resourceOp.display + (resourceOp.grammar != null ? " " + resourceOp.grammar : "");
             return (
                 <span>{resourceOpText}&nbsp;</span>
             );

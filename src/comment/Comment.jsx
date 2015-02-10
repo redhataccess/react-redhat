@@ -5,6 +5,7 @@ var User        = require('../user/User');
 var Badge       = require('react-bootstrap/Badge');
 var CommentType = require('./CommentType');
 var SBT         = require('./SBT');
+var Autolinker      = require('autolinker');
 
 var Component = React.createClass({
     displayName: 'Comment',
@@ -65,6 +66,9 @@ var Component = React.createClass({
                 </span>
             )
         }
+        
+        var commentText= Autolinker.link(comment.text);
+        
         header = (
             <div>
                 <div className='pull-left'>
@@ -99,7 +103,7 @@ var Component = React.createClass({
                     <div className='clearfix'></div>
                 </div>
                 <div className={this.genPanelBodyClasses(comment)}>
-                    <pre className={this.genPreClasses(comment)}>{comment.text}</pre>
+                    <pre className={this.genPreClasses(comment)} dangerouslySetInnerHTML={{__html: commentText}} ></pre>
                 </div>
             </div>
         )
