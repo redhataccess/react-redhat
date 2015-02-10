@@ -1,6 +1,10 @@
 var instance = (
     <div>
-        <SBT sbt="21599"></SBT>;
+        <SBT sbt={21599}></SBT>
+        &nbsp;
+        <SBT sbt={20}></SBT>
+        &nbsp;
+        <SBT sbt={-500}></SBT>
     </div>
 );
 

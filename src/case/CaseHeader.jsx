@@ -64,7 +64,7 @@ var Component = React.createClass({
                         <Spacer />
                         <div className='clearfix'></div>
                         <CaseStatus case={this.props.case} key='status'></CaseStatus>
-                    &nbsp; &nbsp;
+                        &nbsp; &nbsp;
                         <CaseSeverity case={this.props.case} key='severity'></CaseSeverity>
                         <div className='clearfix'></div>
                         <Spacer />

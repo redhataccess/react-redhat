@@ -10,9 +10,9 @@ var Component = React.createClass({
             if (this.props.resource.questionSets) {
                 return ['info', 'Content Review'];
             } else if (this.props.resource.public) {
-                return ['success', 'Public Comment'];
+                return ['success', 'Public'];
             } else if (!this.props.resource.public) {
-                return ['danger', 'Private Comment'];
+                return ['danger', 'Private'];
             } else if (this.props.resource.subject && this.props.resource.body) {
                 return ['warning', 'Account Note'];
             } else {
@@ -26,7 +26,7 @@ var Component = React.createClass({
                 var [style,text] = this.displayStyle();
                 return (
                     <Label bsStyle={style}>
-                {text}
+                    {text}
                     </Label>
                 )
             }else{

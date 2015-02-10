@@ -261,7 +261,7 @@ module.exports = React.createClass({
                   style={{color: '#fff'}}
                   onClick={this.submitForm.bind(this)}
                   disabled={this.createQuery().length == 0}>
-                <Glyph glyph="search">&nbsp;Search</Glyph>`
+                <Glyph glyph="search">&nbsp;Search</Glyph>
               </Button>
             &nbsp;
               Show &nbsp;

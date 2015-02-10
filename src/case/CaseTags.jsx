@@ -19,11 +19,11 @@ var Component = React.createClass({
         }
                 // {this.props.spacer == true ? <Spacer /> : null}
         return (
-            <div>
-                <div className='clearfix'></div>
-                {this.props.case.resource.tags.map((t) => <span key="t"><Label bsStyle="default">{t}</Label>&nbsp;</span>)}
+            <span>
+                {this.props.case.resource.tags.map((t) => <span key={t}><Label bsStyle="default">{t}</Label>&nbsp;</span>)}
                 &nbsp;
-            </div>
+            </span>
+
         )
     }
 });

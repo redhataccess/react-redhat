@@ -23,7 +23,7 @@ var commentResource=
 
 var instance = (
     <div>
-        <CommentType resource={commentResource}></CommentType>;
+        <CommentType resource={commentResource}></CommentType>
     </div>
 );
 

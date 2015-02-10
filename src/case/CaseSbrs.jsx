@@ -19,11 +19,11 @@ var Component = React.createClass({
 		}
                 
     	return (
-    		<div>
-                <div className='clearfix'></div>
-	    		{this.props.case.resource.sbrs.map((s) => <span key={s}><Label bsStyle="default">{s}</Label>&nbsp;</span>)}
-	    		&nbsp;
-    		</div>
+            <span>
+                {this.props.case.resource.sbrs.map((s) => <span key={s}><Label bsStyle="default">{s}</Label>&nbsp;</span>)}
+                &nbsp;
+            </span>
+
 		)
     }
 });
