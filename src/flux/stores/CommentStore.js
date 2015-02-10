@@ -25,13 +25,15 @@ var Store = Marty.createStore({
         });
     },
     receiveComments: function (cn, comments) {
-        var caseNumber = _.padLeft(cn, 8, '0');
-        comments.sort(function(a, b) {
-            return +moment(b.resource.lastModified) - +moment(a.resource.lastModified);
-        });
-        var sorted_comments=comments;
-        if(comments) {
-            var i=comments.length;
+        var caseNumber = _.padLeft(cn, 8, '0'),
+            sorted_comments,
+            i;
+        if(comments != null) {
+            comments.sort(function(a, b) {
+                return +moment(b.resource.created) - +moment(a.resource.created);
+            });
+            sorted_comments = comments;
+            i = comments.length;
              sorted_comments = _.map(comments, function (comment) {
                 comment.resource.commentNumber = i;
                 i -= 1;

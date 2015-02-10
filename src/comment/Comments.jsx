@@ -146,7 +146,7 @@ var Component = React.createClass({
                 checkboxMapping.push({name:'remoteSessions',value:self.props.remoteSessions?self.props.remoteSessions.length:0,display:' Remote Sessions '});
                 checkboxMapping.push({name:'liveChatTranscripts',value:self.props.liveChatTranscripts?self.props.liveChatTranscripts.length:0,display:' Live Chat Transcript(s) '});
                 comment_components.sort(function(a, b){
-                    return +moment(b.resource.lastModified) - +moment(a.resource.lastModified);
+                    return +moment(b.resource.created) - +moment(a.resource.created);
                 });
                 
                 return (
