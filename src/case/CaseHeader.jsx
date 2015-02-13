@@ -1,61 +1,32 @@
-var React       = require('react');
-var padLeft     = require('lodash/string/padLeft');
-var CaseProduct = require('./CaseProduct');
-var CaseStatus  =  require('./CaseStatus');
-var CaseSeverity =  require('./CaseSeverity')
-var CaseSbrs    = require('./CaseSbrs');
-var CaseTags    = require('./CaseTags');
-
-var Spacer      = require('../Spacer');
-var ResourceOpEnum    = require('../enums/ResourceOpEnum.js');
-
+var React           = require('react');
+var padLeft         = require('lodash/string/padLeft');
+var CaseProduct     = require('./CaseProduct');
+var CaseStatus      =  require('./CaseStatus');
+var CaseSeverity    =  require('./CaseSeverity')
+var CaseSbrs        = require('./CaseSbrs');
+var CaseTags        = require('./CaseTags');
+var Spacer          = require('../Spacer');
 var Well            = require('react-bootstrap/Well');
 var Grid            = require('react-bootstrap/Grid');
 var Row             = require('react-bootstrap/Row');
-var Label           = require('react-bootstrap/Label');
 var Col             = require('react-bootstrap/Col');
-var OverlayTrigger  = require('react-bootstrap/OverlayTrigger');
-var Tooltip         = require('react-bootstrap/Tooltip');
 var ButtonToolbar   = require('react-bootstrap/ButtonToolbar');
 var ButtonGroup     = require('react-bootstrap/ButtonGroup');
 var Button          = require('react-bootstrap/Button');
+var CaseHeaderText  = require('./CaseHeaderText');
+
 
 var Component = React.createClass({
-    genEntityOpText: function (c) {
-        var resourceOp, resourceOpText;
-        if (c != null) {
-            resourceOp = ResourceOpEnum.getOpFromCase(c);
-            resourceOpText = resourceOp.display + (resourceOp.grammar != null ? " " + resourceOp.grammar : "");
-            return (
-                <span>{resourceOpText}&nbsp;</span>
-            );
-        }
-        return null;
-    },
-    genFtsLabel: function(c) {
-        if (c.resource.isFTSCase == true) {
-            return <span>&nbsp;<Label bsStyle="danger">FTS</Label></span>;
-        }
-        return null;
-    },
-    genTamLabel: function(c) {
-        if (c.resource.isTAMCase == true) {
-            return <span>&nbsp;<Label bsStyle="primary">TAM</Label></span>;
-        }
-        return null;
-    },
+    
+    
     render: function() {
-        var caseNumber = padLeft(this.props.case.resource.caseNumber, 8, '0');
+
         return (
             <Well key='caseHeader'>
                 <Row>
                     <Col md={12}>
-                        <h2 key='header'>
-                            {this.genEntityOpText(this.props.case)}
-                            Case {caseNumber}
-                            {this.genFtsLabel(this.props.case)}
-                            {this.genTamLabel(this.props.case)}
-                        </h2>
+
+                        <CaseHeaderText case={this.props.case}></CaseHeaderText>
                         <span>
                             <CaseProduct case={this.props.case.resource} key='product'></CaseProduct>
                             <CaseSbrs case={this.props.case} key='sbrs'></CaseSbrs>

@@ -96,6 +96,7 @@ var Component = React.createClass({
                         <hr />
                         <Comments 
                             caseNumber={caseNumber} 
+                            limit={5}
                             caseReviews={c.resource.caseReviews} 
                             remoteSessions={c.resource.remoteSessions} 
                             liveChatTranscripts={c.resource.liveChatTranscripts}></Comments>
