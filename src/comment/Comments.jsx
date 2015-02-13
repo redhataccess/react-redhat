@@ -2,17 +2,16 @@ var React           = require('react/addons');
 var moment          = require('moment');
 var cx              = React.addons.classSet;
 var _               = require('lodash');
-var moment          = require('moment');
 var Comment         = require('./Comment');
 var SlaAttainment   = require('./SlaAttainment');
-
 var Alert           = require('react-bootstrap/Alert');
-
 var State           = require('react-router/dist/react-router').State;
 var CommentActions  = require('../flux/actions/CommentActions');
 var CommentStore    = require('../flux/stores/CommentStore');
 var Marty           = require('marty');
 var AppConstants	= require('../flux/constants/AppConstants');
+var Well            = require('react-bootstrap/Well');
+var Button          = require('react-bootstrap/Button');
 
 var CommentStateMixin = Marty.createStateMixin({
     mixins: [State],
@@ -37,7 +36,8 @@ var Component = React.createClass({
         displayedResourcesLocal.push('remoteSessions');
         displayedResourcesLocal.push('liveChatTranscripts');
         return {
-            displayedResources:displayedResourcesLocal
+            displayedResources:displayedResourcesLocal,
+            showAll:false
         };
     },
     
@@ -54,6 +54,9 @@ var Component = React.createClass({
 
     buildCommentFilters: function(checkboxMapping) {
         return _.map(checkboxMapping,(m)=><label class="checkbox-inline">&nbsp;&nbsp;<input type="checkbox" id={m.name} name={m.name} onChange={this.handleFilterComments(m.name)} checked={this.isFilterChecked(m.name)}>&nbsp;{m.value} {m.display}</input> </label>);
+    },
+    showAllComments:function(){
+        this.setState({'showAll':true});
     },
 
     handleFilterComments:function(name){
@@ -79,12 +82,14 @@ var Component = React.createClass({
         }.bind(this);
     } ,
 
-    genCommentElements: function(comments) {
+    genCommentElements: function(comments,showAll) {
+               
         if (comments && comments.length > 0) {
-            if (_.isNumber(this.props.limit)) {
-                comments = comments.slice(0, this.props.limit);
+            if(!showAll) {
+                if (_.isNumber(this.props.limit)) {
+                    comments = comments.slice(0, this.props.limit);
+                }
             }
-            comments = comments;
             return _.map(comments, (c) => <Comment id={c['externalModelId']} key={c['externalModelId']} comment={c}></Comment>);
         }
         return null;
@@ -148,22 +153,49 @@ var Component = React.createClass({
                 comment_components.sort(function(a, b){
                     return +moment(b.resource.created) - +moment(a.resource.created);
                 });
+
                 
-                return (
-                    <div>
-                        <SlaAttainment negative={negativeSla} all={allSla}></SlaAttainment>
-                        <div className="form-group">
+                if((self.state.showAll) || (comment_components.length<self.props.limit))
+                {
+                    return (
+                        <div>
+                            <SlaAttainment negative={negativeSla} all={allSla}></SlaAttainment>
+                            <div className="form-group">
                             {self.buildCommentFilters(checkboxMapping)}
+                            </div>
+                            <div
+                                className='commentsContainer'
+                                key='commentsContainer'
+                                ref='commentsContainer'>
+			                {self.genCommentElements(comment_components,self.state.showAll)}
+                            </div>
                         </div>
-                        <div
-                            // id={self.props.id}
-                            className='commentsContainer'
-                            key='commentsContainer'
-                            ref='commentsContainer'>
-			                {self.genCommentElements(comment_components)}
+                    )
+                }
+                else {
+
+                    return (
+                        <div>
+                            <SlaAttainment negative={negativeSla} all={allSla}></SlaAttainment>
+                            <div className="form-group">
+                            {self.buildCommentFilters(checkboxMapping)}
+                            </div>
+                            <div
+                                className='commentsContainer'
+                                key='commentsContainer'
+                                ref='commentsContainer'>
+			                {self.genCommentElements(comment_components,self.state.showAll)}
+                            </div>
+                            <Well key='comments'>
+                                <Button bsSize="large" onClick={self.showAllComments} bsStyle='default' bsStyle="primary" block>
+                                    Show All Comments({comment_components.length})
+                                </Button>
+                            </Well>
+                            
+                                
                         </div>
-                    </div>
-                )
+                    )
+                }
             }
         });
     },

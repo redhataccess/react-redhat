@@ -412,7 +412,7 @@ var caseInstance= {
 
 var instance = (
     <div>
-        <Comments case={caseInstance} caseNumber="01339953"></Comments>
+        <Comments caseNumber="01339953" limit={5}></Comments>
     </div>
 );
 
