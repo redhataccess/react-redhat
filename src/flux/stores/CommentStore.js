@@ -32,12 +32,15 @@ var Store = Marty.createStore({
             comments.sort(function(a, b) {
                 return +moment(b.resource.created) - +moment(a.resource.created);
             });
+            comments = _.filter(comments, function(comment)  {
+                return !comment.resource["draft"] ;
+            });
             sorted_comments = comments;
             i = comments.length;
              sorted_comments = _.map(comments, function (comment) {
-                comment.resource.commentNumber = i;
-                i -= 1;
-                return comment;
+                     comment.resource.commentNumber = i;
+                     i -= 1;
+                     return comment;
             });
         }
         this.state[caseNumber] = sorted_comments;
