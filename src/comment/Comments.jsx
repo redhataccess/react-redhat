@@ -112,7 +112,7 @@ var Component = React.createClass({
                 return <Alert bsStyle="danger">Failed to load comments: {err.stack || err}</Alert>;
             },
             done: function (comments) {
-                if (comments == null) {
+                if (comments == null || comments.length==0) {
                     return <Alert bsStyle='warning' key='alert'>No case comments found for this case</Alert>
                 }
                 var negativeSla = _.filter(comments, (comment) => comment.resource["public"] && (comment.resource.sbt != null) && comment.resource.sbt < 0).length;

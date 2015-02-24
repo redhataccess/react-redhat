@@ -25,9 +25,9 @@ var Store = Marty.createStore({
         });
     },
     receiveComments: function (cn, comments) {
-        var caseNumber = _.padLeft(cn, 8, '0'),
-            sorted_comments,
-            i;
+        var caseNumber = _.padLeft(cn, 8, '0');
+        var sorted_comments=[];
+        var  i=0;
         if(comments != null) {
             comments.sort(function(a, b) {
                 return +moment(b.resource.created) - +moment(a.resource.created);
