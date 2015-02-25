@@ -96,6 +96,7 @@ var Root = React.createClass({
         '<link href="vendor/codemirror/solarized.css" rel="stylesheet" />' +
         '<link href="vendor/codemirror/syntax.css" rel="stylesheet" />' +
         '<link href="vendor/typeahead/typeaheadjs.css" rel="stylesheet" />' +
+        '<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">'+
         '<link href="vendor/chosen_v1.3.0/chosen.min.css" rel="stylesheet" />' +
         '<link href="assets/style.css" rel="stylesheet" />' +
         '<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>' +

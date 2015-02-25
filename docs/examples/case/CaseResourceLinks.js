@@ -14,7 +14,7 @@ var resourceLinks=[
             "resourceId": 368162,
             "resourceType": "KnowledgeBaseSolution",
             "attached": "2014-05-06T11:08:53.000Z",
-            "resourceStatus": "Linked",
+            "resourceStatus": "Test",
             "title": "Test Resource Links 2"
         },
         "resourceReliability": "Fresh"
@@ -24,7 +24,7 @@ var resourceLinks=[
             "resourceId": 543221,
             "resourceType": "KnowledgeBaseSolution",
             "attached": "2014-05-06T14:02:26.000Z",
-            "resourceStatus": "Linked",
+            "resourceStatus": "Test",
             "title": "Test Resource Link 3"
         },
         "resourceReliability": "Fresh"
